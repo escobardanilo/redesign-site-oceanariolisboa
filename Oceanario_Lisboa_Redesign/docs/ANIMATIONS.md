@@ -1,0 +1,87 @@
+# Catálogo de Animações — `ANIMATIONS.md`
+
+Tokens partilhados (`js/gsap-config.js`, espelhados em `css/variables.css`):
+
+```js
+EASE = { standard: 'power3.out', soft: 'power2.out', expo: 'expo.out', inOutSoft: 'sine.inOut', back: 'back.out(1.6)' }
+DURATION = { instant: 0.15, fast: 0.3, base: 0.8, slow: 1.2, cinematic: 1.8 }
+```
+
+O ritmo varia por contexto de propósito: revelações de entrada usam
+`expo.out` (chegada rápida, assentamento suave); microinterações usam
+`power2.out`/`power3.out` (mais neutras); nada usa a mesma
+duração/easing em todo o site — ver a tabela abaixo.
+
+## Contrato de `prefers-reduced-motion`
+
+Aplicado em três camadas independentes (nenhuma depende só das outras):
+
+1. **CSS** (`animations.css`): `@media (prefers-reduced-motion: reduce)`
+   força `animation-duration`/`transition-duration` a `0.01ms` global e
+   remove o `transform` estático do hero.
+2. **Classe no `<html>`** (`js/gsap-config.js`): observa a media query e
+   alterna `html.reduced-motion`, para o CSS reagir mesmo que o JS de
+   animação ainda não tenha corrido, e para os módulos JS lerem
+   `isReducedMotion()` a qualquer momento.
+3. **JS/GSAP**: cada timeline neste catálogo tem um ramo explícito para
+   `isReducedMotion() === true` — nunca assume que a camada CSS chega a
+   tempo de anular uma timeline já iniciada.
+
+Quando ativo: smooth scroll (Lenis) não arranca, pinning é substituído por
+scroll nativo, parallax e zoom são desativados, e todas as entradas
+passam a um fade rápido (`DURATION.fast` ou menos) sem deslocamento.
+
+## Catálogo
+
+| Nome | Elemento(s) | Trigger | Duração | Easing | Mobile | Reduced motion |
+|---|---|---|---|---|---|---|
+| Preloader progress | `[data-preloader-fill]`, `[data-preloader-count]` | Boot (`main.js` → `runPreloader`) | ~1.5s simulado + até `window.load`/timeout 2.4s | `power1.inOut` | Igual | Timeout reduzido a 0.35s, sem tween percetível |
+| Preloader exit | `[data-preloader]` | Fim do progress | `DURATION.cinematic * 0.5` (0.8s) | `expo.out` | Igual | Fade simples 0.3s (sem clip-path) |
+| Header drop-in | `[data-site-header]` | Fim do preloader | `DURATION.base` (0.8s) | `expo.out` | Igual | Sem animação (estado final imediato) |
+| Hero media settle-zoom | `img/video` dentro de `[data-hero-media]` | Fim do preloader | `DURATION.cinematic` (1.8s) | `power2.out` | Igual (não estático — ver nota) | Desativado |
+| Hero title line reveal | `[data-hero-line] > span` | Fim do preloader | `DURATION.slow` (1.2s), stagger 0.12s | `expo.out` | Igual | Estado final imediato |
+| Hero stagger (subtítulo/CTA/factos) | `[data-hero-animate]` | Fim do preloader | `DURATION.base`, stagger 0.08s | `expo.out` | Igual | Estado final imediato |
+| Scroll cue pulse | `.hero__scroll-cue` | CSS-only, contínuo | 2.4s loop | `sine.inOut` | Igual | Removido (`animation: none`) |
+| Header scroll state | `[data-site-header]` | `ScrollTrigger` (`top -80`) | Transição CSS 0.6s | `standard` (cubic-bezier) | Igual | Igual (é uma toggleClass, não movimento) |
+| Hero parallax | `[data-hero-media]` | Scroll dentro do hero, `scrub: true` | Ligado ao scroll | linear (`ease:none`, é scrub) | Ativo (subtil) | Desativado |
+| Divisor "quick-info" | `.divider` | `ScrollTrigger` (`top 80%`, once) | 1s | `expo.out` | Igual | `scaleX` final imediato (regra CSS global reduz duração) |
+| Reveal genérico `[data-reveal]` | Cards de destaques, experiências, notícias | `ScrollTrigger.batch` (`top 85%`, once) | `DURATION.base`, stagger 0.1s | `standard` | Igual | Duração cortada para `DURATION.fast`, sem deslocamento Y, sem stagger |
+| Exposições — pin horizontal | `[data-exhibitions-pin]` + `[data-exhibitions-track]` | `ScrollTrigger` pin+scrub (`gsap.matchMedia`, ≥900px) | Ligado ao scroll (`scrub: 0.8`) | linear | **Substituído** por slider nativo com scroll-snap (`<900px` ou reduced motion) | Cai automaticamente no modo slider |
+| Conservação — título/texto | `[data-conservation-title]`, parágrafos | `ScrollTrigger` (`top 70%`, once) | 0.9s / 0.7s stagger 0.12s | `expo.out` | Igual | 0.3s/0.2s, sem deslocamento |
+| Conservação — imagem clip-path | `[data-conservation-media]` | Mesmo trigger, timeline conjunta | 1.3s | `expo.out` | Igual | 0.3s, sem clip inicial |
+| Conservação — contador | `[data-count-to]` | `ScrollTrigger` (`top 85%`, once) por stat | `DURATION.cinematic` (1.8s) | `power2.out` | Igual | 0.4s |
+| Espécies — entrada da secção | `[data-species-stage]` | `ScrollTrigger` (`top 85%`, once) | `DURATION.base` | `standard` | Igual | Sem deslocamento |
+| Espécies — galeria (drag/estado ativo) | `.species-card` | Pointer drag, scroll nativo, teclado | Transições CSS 0.6s (opacidade/escala) | `expo.out` (CSS) | Swipe nativo + botões prev/next | `scrollTo` usa `behavior:'auto'`, sem swipe momentum extra |
+| Reconhecimento — slider | `.milestone` | Clique/dots/autoplay 7s | Transição CSS (`display` toggle, sem tween) | — | Igual | Autoplay desativado |
+| Menu — máscara de entrada | `[data-menu]` (clip-path) | Clique no `[data-menu-toggle]` | `DURATION.slow` (1.2s) | `expo.out` | Igual | `clip-path` final imediato |
+| Menu — stagger dos itens | `[data-menu-link]` | Mesma timeline, offset `-=0.55` | `DURATION.base`, stagger 0.055s | `expo.out` | Igual | Sem deslocamento |
+| Menu — rodapé | `[data-menu-footer-anim]` | Mesma timeline, offset `-=0.35` | `DURATION.fast` | `expo.out` | Igual | Sem deslocamento |
+| Botões magnéticos | `[data-magnetic]` | `mousemove`/`mouseleave` | `gsap.quickTo`, 0.6s | `power2.out` | Desativado (requer `hover:hover` e `pointer:fine`) | Desativado |
+| Cursor contextual | `.cursor-dot` | `pointermove` + `[data-cursor-explore]` | `gsap.quickTo`, 0.45s | `power2.out` | Desativado (mesmo motivo) | Desativado |
+| Cookie banner — saída | `[data-cookie-banner]` | Clique em aceitar/recusar | `DURATION.fast` | GSAP `to` (default) | Igual | Instantâneo, sem deslocamento (curta o suficiente para não necessitar de ramo próprio) |
+
+### Nota sobre o "zoom" da hero
+
+A imagem/vídeo de fundo do hero **não** tem uma transformação de escala em
+repouso — só a timeline de entrada (`runHeroIntro`) aplica um
+`gsap.from(media, { scale: 1.1 → 1 })` transitório que termina em
+`scale(1)`. Isto não é só estilístico: um `transform: scale()` estático
+sobre esta camada full-bleed foi verificado, durante os testes a 320px, a
+fazer `document.documentElement.scrollWidth` exceder o viewport mesmo com
+`overflow: hidden` em todos os antecessores — o Chromium continua a
+contar os limites visuais pós-transformação para o "scrollable overflow"
+neste caso. Ver `css/components.css` (comentário em `.hero__media`).
+
+## Limpeza e performance
+
+- `ScrollTrigger.batch` é usado para revelações repetidas em vez de um
+  `ScrollTrigger` por elemento.
+- `gsap.matchMedia()` devolve funções de cleanup em cada contexto
+  (exposições) — chamadas automaticamente pelo GSAP quando a media query
+  deixa de corresponder, sem necessidade de as gerir manualmente.
+- `ScrollTrigger.refresh()` corre após `document.fonts.ready` e após o
+  evento `load`, para recalcular posições depois de tipos de letra/imagens
+  assentarem (`scroll-effects.js` → `refreshOnSettle`).
+- Nenhuma animação usa propriedades que desencadeiem layout thrashing
+  (só `transform`/`opacity`/`clip-path`, exceto o `width` da barra de
+  progresso, que é intencionalmente simples e pouco frequente).

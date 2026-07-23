@@ -1,0 +1,101 @@
+/* ==========================================================================
+   ACCESSIBILITY
+   Focus states, skip link, screen-reader helpers, focus trap support.
+   ========================================================================== */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.site-header :focus-visible,
+.mega-menu :focus-visible,
+.hero :focus-visible,
+.conservation :focus-visible,
+.newsletter :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--color-lime);
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 1100;
+  transform: translateY(-150%);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-lime);
+  color: var(--color-navy);
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-sm);
+  transition: transform var(--dur-fast) var(--ease-out-expo);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline-color: var(--color-navy);
+}
+
+/* Screen-reader only (kept distinct from .visually-hidden for semantic
+   clarity in markup: this one is specifically for text content). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Elements that must stay in the DOM/tab order but are visually replaced
+   by a decorative GSAP-driven counterpart. */
+.a11y-static-fallback {
+  position: static;
+}
+
+/* Ensures interactive cards remain operable and legible without hover
+   (mobile + keyboard users get the same information as mouse users). */
+@media (hover: none), (pointer: coarse) {
+  .experience-card__reveal {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    margin-top: var(--space-2xs);
+  }
+}
+
+/* High-contrast-friendly focus for elements placed on media/imagery */
+.media-frame :focus-visible,
+.experience-card:focus-visible,
+.highlight-card:focus-visible,
+.species-card:focus-visible {
+  outline-offset: 4px;
+}
+
+/* Respect forced-colors mode (Windows High Contrast) for custom controls */
+@media (forced-colors: active) {
+  .btn,
+  .field input,
+  .species__control,
+  .testimonial__dot {
+    forced-color-adjust: none;
+    border: 1px solid CanvasText;
+  }
+}
+
+/* Never let the custom cursor or decorative layers block interaction
+   for users who don't have a fine pointer (defense in depth alongside
+   the JS matchMedia gate in js/animations.js). */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot {
+    display: none;
+  }
+}

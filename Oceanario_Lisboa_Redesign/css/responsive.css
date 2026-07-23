@@ -1,0 +1,293 @@
+/* ==========================================================================
+   RESPONSIVE
+   Base styles (in layout.css / components.css) target large desktop.
+   This file steps the layout down through each documented breakpoint:
+   1440 → 1280 → 1024 → 768 → 390 → 320.
+   Animation *behavior* per breakpoint is handled by gsap.matchMedia() in
+   js/scroll-effects.js using the same widths.
+   ========================================================================== */
+
+/* ---------- ≤1280px : Desktop ---------- */
+@media (max-width: 1280px) {
+  :root {
+    --space-section: clamp(3.5rem, 3rem + 4vw, 8rem);
+  }
+
+  .mega-menu__layout {
+    grid-template-columns: 1.3fr 0.7fr;
+  }
+
+  .exhibition-panel {
+    flex-basis: min(88vw, 760px);
+  }
+}
+
+/* ---------- ≤1024px : Laptop / small desktop ---------- */
+@media (max-width: 1024px) {
+  .experiences__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .news__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .conservation__grid,
+  .newsletter__grid,
+  .plan-visit__split {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .plan-visit__split {
+    direction: ltr;
+  }
+
+  .conservation__media {
+    order: -1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .site-footer__nav-columns {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-xl);
+  }
+
+  .mega-menu__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mega-menu__visual {
+    display: none;
+  }
+
+  .hero__quickfacts {
+    gap: var(--space-md);
+  }
+}
+
+/* ---------- ≤768px : Tablet ---------- */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 76px;
+    --header-height-scrolled: 60px;
+  }
+
+  .section {
+    padding-block: var(--space-xl);
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .split,
+  .split--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .lang-switch span[data-lang-full] {
+    display: none;
+  }
+
+  .site-header__actions {
+    gap: var(--space-sm);
+  }
+
+  .mega-menu__link {
+    font-size: clamp(1.5rem, 1.1rem + 3vw, 2.5rem);
+  }
+
+  .hero__title {
+    max-width: 14ch;
+  }
+
+  .hero__cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__cta-group .btn {
+    width: 100%;
+  }
+
+  .exhibitions__track {
+    gap: var(--space-md);
+  }
+
+  .exhibition-panel {
+    grid-template-columns: 1fr;
+    flex-basis: 88vw;
+    gap: var(--space-md);
+  }
+
+  .exhibition-panel__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .experiences__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-card {
+    aspect-ratio: 4 / 3.4;
+  }
+
+  .news__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .species-card {
+    flex-basis: min(72vw, 300px);
+  }
+
+  .conservation__stats {
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .site-footer__nav-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .newsletter__row {
+    flex-direction: column;
+  }
+
+  .cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+}
+
+/* ---------- ≤480px : Mobile (covers 390 and 320) ---------- */
+@media (max-width: 480px) {
+  :root {
+    --space-section: 3.25rem;
+    --header-height: 68px;
+    --header-height-scrolled: 56px;
+  }
+
+  .container {
+    padding-inline: var(--space-sm);
+  }
+
+  .site-header__logo {
+    font-size: 1.05rem;
+  }
+
+  .site-header__logo span {
+    display: none;
+  }
+
+  .site-header__actions {
+    gap: var(--space-xs);
+  }
+
+  .lang-switch {
+    display: none;
+  }
+
+  .site-header .btn-sm {
+    padding: 0.7em 1.1em;
+  }
+
+  .menu-toggle span[data-menu-label] {
+    display: none;
+  }
+
+  .mega-menu__inner {
+    padding-top: calc(var(--header-height) + var(--space-sm));
+  }
+
+  .mega-menu__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .hero__content {
+    padding-bottom: var(--space-xl);
+  }
+
+  .hero__quickfacts {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .hero__scroll-cue {
+    right: var(--space-sm);
+    bottom: var(--space-md);
+  }
+
+  .quick-info__list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .quick-info__item {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .highlight-card {
+    flex-basis: 84vw;
+    aspect-ratio: 3 / 4;
+  }
+
+  .exhibition-panel {
+    flex-basis: 92vw;
+  }
+
+  .exhibition-panel__title {
+    font-size: var(--fs-display-md);
+  }
+
+  .species-card {
+    flex-basis: 68vw;
+  }
+
+  .testimonial__quote {
+    font-size: var(--fs-display-sm);
+  }
+
+  .site-footer__nav-columns {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .plan-visit__item {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xs);
+  }
+}
+
+/* ---------- Fine-pointer-only enhancements ----------
+   Hover-dependent micro-interactions are additive, never load-bearing:
+   all information they reveal is already visible by default on touch
+   (see accessibility.css). */
+@media (hover: hover) and (pointer: fine) {
+  .has-magnetic {
+    will-change: transform;
+  }
+}
+
+/* ---------- Landscape phones: avoid oversized min-heights ---------- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero,
+  .full-viewport {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .mega-menu__visual {
+    display: none;
+  }
+}

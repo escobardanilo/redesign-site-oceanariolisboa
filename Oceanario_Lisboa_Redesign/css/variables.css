@@ -1,0 +1,123 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   Single source of truth for color, type, spacing, radius, z-index,
+   duration and easing. See docs/DESIGN_SYSTEM.md for the annotated version.
+   ========================================================================== */
+
+:root {
+  /* ---------- Color — primary ---------- */
+  --color-background: #f1f1f1;
+  --color-navy: #002056;
+
+  /* ---------- Color — accents (used sparingly, never all at once) ---------- */
+  --color-lime: #dafd6a;
+  --color-pink: #ff017f;
+  --color-green: #0dfc95;
+
+  /* ---------- Color — neutrals derived from the two primaries ---------- */
+  --color-white: #ffffff;
+  --color-ink: #05132b;
+  --color-navy-90: rgba(0, 32, 86, 0.92);
+  --color-navy-70: rgba(0, 32, 86, 0.72);
+  --color-navy-40: rgba(0, 32, 86, 0.4);
+  --color-navy-16: rgba(0, 32, 86, 0.16);
+  --color-navy-08: rgba(0, 32, 86, 0.08);
+  --color-mist-16: rgba(241, 241, 241, 0.16);
+  --color-mist-70: rgba(241, 241, 241, 0.7);
+
+  /* ---------- Color — semantic roles ---------- */
+  --color-surface: var(--color-background);
+  --color-surface-deep: var(--color-navy);
+  --color-text-on-light: var(--color-navy);
+  --color-text-on-light-muted: var(--color-navy-70);
+  --color-text-on-dark: var(--color-background);
+  --color-text-on-dark-muted: var(--color-mist-70);
+  --color-border-on-light: var(--color-navy-16);
+  --color-border-on-dark: var(--color-mist-16);
+  --color-accent-primary: var(--color-lime);
+  --color-accent-alert: var(--color-pink);
+  --color-accent-fresh: var(--color-green);
+  --color-focus-ring: var(--color-pink);
+  --color-success: var(--color-green);
+  --color-error: var(--color-pink);
+
+  /* ---------- Typography — families ---------- */
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ---------- Typography — fluid scale (clamp: min, preferred, max) ---------- */
+  --fs-display-2xl: clamp(3rem, 2rem + 5.5vw, 8.5rem);      /* hero headline */
+  --fs-display-xl: clamp(2.5rem, 1.7rem + 4vw, 6rem);        /* section leads */
+  --fs-display-lg: clamp(2rem, 1.5rem + 2.6vw, 4rem);        /* section titles */
+  --fs-display-md: clamp(1.5rem, 1.2rem + 1.6vw, 2.75rem);   /* card / panel titles */
+  --fs-display-sm: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);  /* small headings */
+
+  --fs-body-lg: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);  /* intros / leads */
+  --fs-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);         /* base copy */
+  --fs-body-sm: clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);/* fine print */
+  --fs-label: clamp(0.6875rem, 0.66rem + 0.1vw, 0.75rem);    /* uppercase labels */
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.7;
+
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-label: 0.14em;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --measure: 62ch; /* controlled reading width */
+  --measure-narrow: 42ch;
+
+  /* ---------- Spacing scale ---------- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+  --space-section: clamp(4rem, 3rem + 5vw, 10rem);
+  --space-container: clamp(1.25rem, 1rem + 2vw, 4rem);
+
+  /* ---------- Layout ---------- */
+  --container-max: 1600px;
+  --header-height: 88px;
+  --header-height-scrolled: 68px;
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 4px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* ---------- Z-index scale ---------- */
+  --z-base: 1;
+  --z-content: 10;
+  --z-sticky: 100;
+  --z-header: 500;
+  --z-cookie-banner: 700;
+  --z-menu-overlay: 900;
+  --z-cursor: 950;
+  --z-preloader: 1000;
+
+  /* ---------- Duration (mirrored in js/gsap-config.js) ---------- */
+  --dur-instant: 0.15s;
+  --dur-fast: 0.3s;
+  --dur-base: 0.6s;
+  --dur-slow: 0.9s;
+  --dur-cinematic: 1.6s;
+
+  /* ---------- Easing (mirrored in js/gsap-config.js) ---------- */
+  --ease-standard: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
+}

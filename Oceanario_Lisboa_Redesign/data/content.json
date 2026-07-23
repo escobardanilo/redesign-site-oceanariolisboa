@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "siteName": "Oceanário de Lisboa",
+    "locale": "pt-PT",
+    "conceptualNotice": "Redesign conceptual e não-oficial do website do Oceanário de Lisboa, produzido como exercício de storytelling digital e engenharia front-end. Não representa nem substitui o website oficial."
+  },
+  "nav": {
+    "primary": [
+      { "key": "planear", "label": "Planear Visita", "href": "#plan-visit" },
+      { "key": "exposicoes", "label": "Exposições", "href": "#exhibitions" },
+      { "key": "experiencias", "label": "Experiências", "href": "#experiences" },
+      { "key": "conservacao", "label": "Conservação", "href": "#conservation" },
+      { "key": "especies", "label": "Espécies", "href": "#species" },
+      { "key": "novidades", "label": "Novidades", "href": "#news" }
+    ],
+    "tickets": { "label": "Comprar bilhetes", "href": "https://tickets.oceanario.pt/" }
+  },
+  "hero": {
+    "eyebrow": "Oceanário de Lisboa",
+    "titleLines": ["O oceano", "começa aqui"],
+    "subtitle": "Na Doca dos Olivais, um só tanque central liga quatro habitats — do Atlântico Norte ao Índico Tropical — para contar a história de um único oceano partilhado por todo o planeta.",
+    "primaryCta": { "label": "Comprar bilhetes", "href": "https://tickets.oceanario.pt/" },
+    "secondaryCta": { "label": "Descobrir o Oceanário", "href": "#exhibitions" },
+    "quickFacts": [
+      { "label": "Horário", "value": "10h – 20h, todos os dias" },
+      { "label": "Onde fica", "value": "Parque das Nações, Lisboa" }
+    ]
+  },
+  "quickInfo": {
+    "eyebrow": "Antes de vir",
+    "title": "O essencial para a sua visita",
+    "items": [
+      { "key": "horario", "icon": "clock", "label": "Horário", "value": "10:00 — 20:00", "href": "#plan-visit" },
+      { "key": "abertura", "icon": "calendar", "label": "Abertura", "value": "Todos os dias do ano", "href": "#plan-visit" },
+      { "key": "bilhetes", "icon": "ticket", "label": "Bilhetes", "value": "Ver preços atuais", "href": "https://tickets.oceanario.pt/" },
+      { "key": "local", "icon": "pin", "label": "Onde fica", "value": "Doca dos Olivais, Parque das Nações", "href": "#plan-visit" },
+      { "key": "acessibilidade", "icon": "access", "label": "Acessibilidade", "value": "Oceanário para Todos", "href": "#plan-visit" }
+    ]
+  },
+  "highlights": {
+    "eyebrow": "Novidades 2026",
+    "title": "Há sempre um novo motivo para voltar",
+    "text": "Duas experiências recentes juntam-se à exposição permanente este ano — uma prehistórica, outra imersiva — sem custo adicional sobre o bilhete de entrada.",
+    "items": [
+      {
+        "key": "monstros-marinhos",
+        "category": "Exposição temporária",
+        "title": "Monstros Marinhos",
+        "text": "Réplicas à escala real de predadores marinhos pré-históricos, num percurso pelo átrio principal desenvolvido com o Dino Parque Lourinhã. Incluída no bilhete de entrada.",
+        "cta": { "label": "Explorar exposição", "href": "https://oceanario.pt/exposicoes/monstros-marinhos/" },
+        "image": "assets/images/exhibitions/monstros-marinhos.jpg",
+        "imageAlt": "Réplica de predador marinho pré-histórico em exibição na exposição Monstros Marinhos",
+        "source": "https://oceanario.pt/exposicoes/monstros-marinhos/"
+      },
+      {
+        "key": "universo-submerso",
+        "category": "Instalação imersiva",
+        "title": "Universo Submerso",
+        "text": "Uma nova instalação de arte, luz e som que liga o cosmos às profundezas oceânicas, do plâncton às baleias — uma jornada de cerca de quatro minutos no piso superior.",
+        "cta": { "label": "Explorar instalação", "href": "https://oceanario.pt/universo-submerso-nova-exposicao/" },
+        "image": "assets/images/exhibitions/universo-submerso.jpg",
+        "imageAlt": "Projeção imersiva de luz da instalação Universo Submerso",
+        "source": "https://oceanario.pt/universo-submerso-nova-exposicao/"
+      }
+    ]
+  },
+  "conservation": {
+    "kicker": "Conservação",
+    "title": "Um oceano só se protege se for compreendido",
+    "text": "O Oceanário de Lisboa é detido pela Fundação Oceano Azul e foi o primeiro aquário da Europa a integrar a rede de Centros de Sobrevivência de Espécies da Comissão de Sobrevivência de Espécies da UICN — uma rede internacional dedicada a travar a perda de biodiversidade.",
+    "text2": "Do Fundo para a Conservação dos Oceanos ao pioneirismo na reprodução sexuada de corais em ambiente controlado, o trabalho científico continua muito depois de a visita terminar.",
+    "stats": [
+      { "value": 500, "suffix": "+", "label": "espécies representadas no tanque central e habitats" },
+      { "value": 150000, "suffix": "€", "label": "atribuídos na 3.ª edição do Fundo para a Conservação dos Oceanos" }
+    ],
+    "cta": { "label": "Conhecer o trabalho de conservação", "href": "https://oceanario.pt/en/conservation/" },
+    "media": "assets/images/conservation/centro-sobrevivencia-especies.jpg",
+    "mediaAlt": "Trabalho científico de conservação marinha do Oceanário de Lisboa",
+    "source": "https://oceanario.pt/en/the-oceanario-lisbon-aquarium-is-the-first-center-for-species-survival-of-the-ssc-iucn/"
+  },
+  "recognition": {
+    "eyebrow": "Reconhecimento",
+    "title": "Marcos verificáveis, não citações inventadas",
+    "note": "Não foi possível confirmar testemunhos reais de visitantes através das fontes disponíveis nesta pesquisa — por isso, em vez de os inventar, esta secção reúne factos institucionais verificados.",
+    "items": [
+      {
+        "statement": "Primeiro aquário da Europa — e única organização portuguesa — integrado na rede de Centros de Sobrevivência de Espécies da Comissão de Sobrevivência de Espécies da UICN.",
+        "source": "IUCN SSC — oceanario.pt"
+      },
+      {
+        "statement": "Detido pela Fundação Oceano Azul desde 2016, com concessão de exploração de 30 anos assente em três pilares: literacia, conservação e capacitação.",
+        "source": "Fundação Oceano Azul"
+      },
+      {
+        "statement": "\"Florestas Submersas by Takashi Amano\" recebeu mais de dez anos de visitantes antes de encerrar em junho de 2026 — o maior aquário de água doce alguma vez construído.",
+        "source": "oceanario.pt"
+      }
+    ]
+  },
+  "planVisit": {
+    "eyebrow": "Informação prática",
+    "title": "Planeie a sua visita",
+    "text": "Reúna aqui o que precisa de saber antes de chegar — os detalhes sazonais devem ser sempre confirmados no canal oficial de venda de bilhetes.",
+    "items": [
+      { "term": "Horário", "desc": "Todos os dias, 10:00 – 20:00 (horário de verão). Consulte o horário sazonal atualizado antes da visita.", "href": "https://oceanario.pt/en/plan-your-visit/", "linkLabel": "Confirmar horário atual" },
+      { "term": "Última entrada", "desc": "Recomendamos a chegada com pelo menos uma hora de antecedência em relação ao fecho." },
+      { "term": "Localização", "desc": "Esplanada Dom Carlos I, s/nº, Doca dos Olivais, Parque das Nações, 1990-005 Lisboa." },
+      { "term": "Metro", "desc": "Linha Vermelha, estação do Oriente — cerca de 8 a 10 minutos a pé." },
+      { "term": "Autocarro", "desc": "Diversas carreiras Carris servem o Parque das Nações. Consulte a página oficial \"Como Chegar\" para as linhas atualizadas.", "href": "https://oceanario.pt/en/visit/plan-your-visit/how-to-get-there/", "linkLabel": "Ver como chegar" },
+      { "term": "Telecabine", "desc": "Estação Sul (Passeio do Neptuno) a cerca de 11 minutos a pé — ligação disponível em bilhete combinado." },
+      { "term": "Estacionamento", "desc": "Parque próprio junto ao edifício, a cerca de 7 minutos a pé, e parques adicionais na envolvente da estação do Oriente." },
+      { "term": "Acessibilidade", "desc": "Percurso adaptado a visitantes com mobilidade reduzida e programa \"Oceanário para Todos\", com visitas inclusivas mensais para pessoas com deficiência visual e auditiva.", "href": "https://oceanario.pt/en/visit/plan-your-visit/accessibility/", "linkLabel": "Saber mais sobre acessibilidade" },
+      { "term": "Wi-Fi", "desc": "Rede sem fios disponível no edifício." },
+      { "term": "Loja", "desc": "Loja oficial no edifício e loja online em loja.oceanario.pt.", "href": "https://loja.oceanario.pt/", "linkLabel": "Visitar a loja online" },
+      { "term": "Restaurantes", "desc": "#SeaTheFuture (cozinha sustentável, com opções vegan e sem glúten) e Zafra Coffee & Bar, para refeições ligeiras e café." }
+    ],
+    "mapAddress": "Esplanada Dom Carlos I, s/nº, Doca dos Olivais, Parque das Nações, 1990-005 Lisboa",
+    "mapHref": "https://www.google.com/maps/search/?api=1&query=Ocean%C3%A1rio+de+Lisboa"
+  },
+  "newsletter": {
+    "eyebrow": "Junte-se a nós",
+    "title": "Faça parte desta missão.",
+    "text": "Novidades sobre exposições, conservação e experiências do Oceanário de Lisboa — sem spam, cancele quando quiser.",
+    "privacyHref": "https://oceanario.pt/en/privacy-policy/",
+    "disclaimer": "Formulário demonstrativo: este protótipo não envia dados a nenhum servidor. Nenhuma subscrição real é criada — ver docs/ANIMATIONS.md e README.md."
+  },
+  "contact": {
+    "phone": "+351 218 917 000",
+    "phoneHref": "tel:+351218917000",
+    "email": "info@oceanario.pt",
+    "emailHref": "mailto:info@oceanario.pt",
+    "address": "Esplanada Dom Carlos I, s/nº, Doca dos Olivais, Parque das Nações, 1990-005 Lisboa"
+  },
+  "social": [
+    { "key": "facebook", "label": "Facebook", "href": "https://www.facebook.com/Oceanario.de.Lisboa/" },
+    { "key": "instagram", "label": "Instagram", "href": "https://www.instagram.com/oceanariodelisboa/" },
+    { "key": "youtube", "label": "YouTube", "href": "https://www.youtube.com/OceanarioLisboa" },
+    { "key": "linkedin", "label": "LinkedIn", "href": "https://pt.linkedin.com/company/oceanariodelisboa" }
+  ],
+  "footer": {
+    "columns": [
+      {
+        "title": "Visitar",
+        "links": [
+          { "label": "Planear visita", "href": "#plan-visit" },
+          { "label": "Comprar bilhetes", "href": "https://tickets.oceanario.pt/" },
+          { "label": "Bilhete combinado + Telecabine", "href": "https://oceanario.pt/en/buy-tickets/combined-ticket/" },
+          { "label": "Membership", "href": "https://oceanario.pt/en/membership/" }
+        ]
+      },
+      {
+        "title": "Descobrir",
+        "links": [
+          { "label": "Exposições", "href": "#exhibitions" },
+          { "label": "Experiências", "href": "#experiences" },
+          { "label": "Espécies", "href": "#species" },
+          { "label": "Novidades", "href": "#news" }
+        ]
+      },
+      {
+        "title": "Missão",
+        "links": [
+          { "label": "Conservação", "href": "#conservation" },
+          { "label": "Fundação Oceano Azul", "href": "https://oceanoazulfoundation.org/" },
+          { "label": "Educação e escolas", "href": "https://oceanario.pt/programas/escolas/visitas-de-estudo/programas-no-oceanario/" },
+          { "label": "Empresas", "href": "https://oceanario.pt/teambuilding-seastainability/" }
+        ]
+      },
+      {
+        "title": "Contactos",
+        "links": [
+          { "label": "info@oceanario.pt", "href": "mailto:info@oceanario.pt" },
+          { "label": "+351 218 917 000", "href": "tel:+351218917000" },
+          { "label": "Esplanada Dom Carlos I, Lisboa", "href": "https://www.google.com/maps/search/?api=1&query=Ocean%C3%A1rio+de+Lisboa" }
+        ]
+      }
+    ],
+    "legal": [
+      { "label": "Política de privacidade", "href": "https://oceanario.pt/en/privacy-policy/" },
+      { "label": "Política de cookies", "href": "https://oceanario.pt/en/cookies-policy/" },
+      { "label": "Termos e condições", "href": "https://oceanario.pt/en/terms-and-conditions-of-use/" }
+    ],
+    "disclaimer": "Este website é um redesign conceptual e não-oficial, criado para fins de demonstração de engenharia front-end e design de interação. Não é operado pelo Oceanário de Lisboa nem pela Fundação Oceano Azul. Para informação oficial e atualizada, visite oceanario.pt."
+  }
+}

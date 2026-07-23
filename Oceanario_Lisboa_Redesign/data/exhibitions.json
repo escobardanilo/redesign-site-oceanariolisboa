@@ -1,0 +1,40 @@
+{
+  "eyebrow": "Exposições",
+  "title": "Um só oceano, quatro habitats",
+  "text": "Da exposição permanente às instalações mais recentes — um percurso vertical que se transforma em narrativa horizontal.",
+  "items": [
+    {
+      "key": "um-planeta-um-oceano",
+      "index": 1,
+      "category": "Exposição permanente",
+      "title": "Um Planeta, Um Oceano",
+      "text": "Um tanque central com cerca de 5 milhões de litros de água salgada, rodeado por quatro habitats — Atlântico Norte, Antártida, Pacífico Temperado e Índico Tropical — que criam a ilusão de um único oceano contínuo, distribuído por dois pisos.",
+      "cta": { "label": "Explorar a exposição", "href": "https://oceanario.pt/en/exhibitions/aquarium/" },
+      "image": "assets/images/exhibitions/um-planeta-um-oceano.jpg",
+      "imageAlt": "Tanque central da exposição permanente Um Planeta, Um Oceano, com cardume em ambiente de recife",
+      "source": "https://oceanario.pt/en/exhibitions/aquarium/"
+    },
+    {
+      "key": "monstros-marinhos",
+      "index": 2,
+      "category": "Exposição temporária · até 1 nov 2026",
+      "title": "Monstros Marinhos",
+      "text": "Réplicas à escala real de predadores marinhos que percorreram os oceanos ao longo de mais de 400 milhões de anos, instaladas no átrio principal em parceria com o Dino Parque Lourinhã. Incluída no bilhete de entrada.",
+      "cta": { "label": "Explorar a exposição", "href": "https://oceanario.pt/exposicoes/monstros-marinhos/" },
+      "image": "assets/images/exhibitions/monstros-marinhos.jpg",
+      "imageAlt": "Réplica de predador marinho pré-histórico na exposição Monstros Marinhos",
+      "source": "https://oceanario.pt/exposicoes/monstros-marinhos/"
+    },
+    {
+      "key": "universo-submerso",
+      "index": 3,
+      "category": "Instalação imersiva · nova em 2026",
+      "title": "Universo Submerso",
+      "text": "Uma instalação de arte, luz e som criada com o estúdio LesAteliers BK, que liga o cosmos às profundezas oceânicas — do plâncton às baleias — numa jornada de cerca de quatro minutos no piso superior.",
+      "cta": { "label": "Explorar a instalação", "href": "https://oceanario.pt/universo-submerso-nova-exposicao/" },
+      "image": "assets/images/exhibitions/universo-submerso.jpg",
+      "imageAlt": "Projeção de luz imersiva da instalação Universo Submerso",
+      "source": "https://oceanario.pt/universo-submerso-nova-exposicao/"
+    }
+  ]
+}

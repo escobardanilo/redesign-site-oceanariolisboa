@@ -1,0 +1,24 @@
+{
+  "name": "oceanario-lisboa-redesign",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Redesign conceptual e não-oficial da experiência digital do Oceanário de Lisboa — protótipo front-end de storytelling imersivo.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.1.1",
+    "@fontsource/instrument-serif": "^5.1.1",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.18"
+  },
+  "devDependencies": {
+    "vite": "^8.1.5"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

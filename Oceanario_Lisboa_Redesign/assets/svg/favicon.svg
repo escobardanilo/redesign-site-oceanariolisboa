@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Oceanário de Lisboa — redesign conceptual">
+  <rect width="64" height="64" rx="14" fill="#002056" />
+  <path d="M8 38 C 18 30, 26 46, 36 38 S 52 30, 58 37" fill="none" stroke="#dafd6a" stroke-width="4" stroke-linecap="round" />
+  <path d="M8 47 C 18 40, 26 54, 36 47 S 52 40, 58 46" fill="none" stroke="#0dfc95" stroke-width="4" stroke-linecap="round" opacity="0.8" />
+  <circle cx="32" cy="20" r="6" fill="#f1f1f1" />
+</svg>

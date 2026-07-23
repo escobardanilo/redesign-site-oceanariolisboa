@@ -1,0 +1,61 @@
+{
+  "eyebrow": "Espécies",
+  "title": "Alguns dos rostos do Oceanário",
+  "text": "Uma pequena amostra de mais de 500 espécies representadas no tanque central e nos habitats — arraste, deslize ou use as setas para conhecer cada uma.",
+  "items": [
+    {
+      "key": "peixe-lua",
+      "name": "Peixe-lua",
+      "latin": "Mola mola",
+      "text": "O maior peixe ósseo do mundo, um dos habitantes mais reconhecíveis do tanque central.",
+      "image": "assets/images/species/peixe-lua.jpg",
+      "imageAlt": "Peixe-lua (Mola mola) no tanque central do Oceanário de Lisboa"
+    },
+    {
+      "key": "lontra-marinha",
+      "name": "Lontra-marinha",
+      "latin": "Enhydra lutris",
+      "text": "Micas e Maré, nascidas no Oceanário, vivem na zona do Pacífico Temperado.",
+      "image": "assets/images/species/lontra-marinha.jpg",
+      "imageAlt": "Lontra-marinha na zona do Pacífico Temperado do Oceanário de Lisboa"
+    },
+    {
+      "key": "tubarao-touro",
+      "name": "Tubarão-touro",
+      "latin": "Carcharias taurus",
+      "text": "Um dos tubarões que partilha o tanque central com raias e cardumes de várias espécies.",
+      "image": "assets/images/species/tubarao-touro.jpg",
+      "imageAlt": "Tubarão-touro a nadar no tanque central do Oceanário de Lisboa"
+    },
+    {
+      "key": "raia-manta",
+      "name": "Raia-manta",
+      "latin": "Mobula spp.",
+      "text": "Desliza junto à superfície do tanque central, com a envergadura característica das mantas.",
+      "image": "assets/images/species/raia-manta.jpg",
+      "imageAlt": "Raia-manta a nadar no tanque central do Oceanário de Lisboa"
+    },
+    {
+      "key": "enguia-jardim",
+      "name": "Enguia-jardim",
+      "latin": "Heteroconger hassi",
+      "text": "Vive semienterrada em colónias, balançando ao ritmo da corrente como um jardim vivo.",
+      "image": "assets/images/species/enguia-jardim.jpg",
+      "imageAlt": "Colónia de enguias-jardim semienterradas no substrato"
+    },
+    {
+      "key": "medusa",
+      "name": "Medusa",
+      "text": "Um dos organismos mais antigos do planeta, presente nas galerias dedicadas a espécies pelágicas.",
+      "image": "assets/images/species/medusa.jpg",
+      "imageAlt": "Medusa em exibição numa galeria dedicada a espécies pelágicas"
+    },
+    {
+      "key": "coral",
+      "name": "Coral",
+      "text": "O Oceanário é pioneiro na reprodução sexuada de corais em ambiente controlado.",
+      "image": "assets/images/species/coral.jpg",
+      "imageAlt": "Recife de coral em exibição no Oceanário de Lisboa"
+    }
+  ]
+}

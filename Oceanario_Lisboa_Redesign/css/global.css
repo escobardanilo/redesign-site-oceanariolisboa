@@ -1,0 +1,303 @@
+/* ==========================================================================
+   GLOBAL — document-level styles, buttons, links, form fields.
+   ========================================================================== */
+
+body {
+  background: var(--color-background);
+  color: var(--color-text-on-light);
+  font-family: var(--font-body);
+}
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100svh;
+}
+
+main {
+  display: block;
+}
+
+img {
+  object-fit: cover;
+}
+
+/* ---------- Links ---------- */
+
+.link-inline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-weight: var(--fw-medium);
+}
+
+.link-inline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.2em;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform var(--dur-base) var(--ease-out-expo);
+}
+
+.link-inline:hover::after,
+.link-inline:focus-visible::after {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  min-height: 44px;
+  padding: 0.95em 1.9em;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.01em;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: background-color var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-out-expo);
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--color-navy);
+  color: var(--color-background);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--color-lime);
+  color: var(--color-navy);
+}
+
+.btn-accent {
+  background: var(--color-lime);
+  color: var(--color-navy);
+}
+
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  background: var(--color-navy);
+  color: var(--color-lime);
+}
+
+.btn-outline {
+  background: transparent;
+  color: currentColor;
+  border-color: currentColor;
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: currentColor;
+}
+
+.btn-outline.btn-on-light:hover,
+.btn-outline.btn-on-light:focus-visible {
+  color: var(--color-background);
+}
+
+.btn-outline.btn-on-dark:hover,
+.btn-outline.btn-on-dark:focus-visible {
+  color: var(--color-navy);
+}
+
+.btn-ghost {
+  padding: 0.5em 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.btn-sm {
+  padding: 0.7em 1.4em;
+  font-size: var(--fs-label);
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-icon-arrow {
+  display: inline-flex;
+  transition: transform var(--dur-base) var(--ease-out-expo);
+}
+
+.btn:hover .btn-icon-arrow {
+  transform: translateX(4px);
+}
+
+/* Shared circular icon button — species gallery + recognition slider nav. */
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-on-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  background: var(--color-navy);
+  color: var(--color-background);
+}
+
+.icon-btn[disabled] {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.icon-btn--on-dark {
+  border-color: var(--color-border-on-dark);
+}
+
+.icon-btn--on-dark:hover,
+.icon-btn--on-dark:focus-visible {
+  background: var(--color-lime);
+  color: var(--color-navy);
+}
+
+/* ---------- Form fields ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.field label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+
+.field input[type='email'],
+.field input[type='text'] {
+  padding: var(--space-sm);
+  background: transparent;
+  border: 1px solid var(--color-border-on-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-body);
+  color: inherit;
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+
+.field input:focus-visible {
+  outline: none;
+  border-color: var(--color-navy);
+}
+
+.field-on-dark input[type='email'],
+.field-on-dark input[type='text'] {
+  border-color: var(--color-border-on-dark);
+  color: var(--color-text-on-dark);
+}
+
+.field-on-dark input:focus-visible {
+  border-color: var(--color-lime);
+}
+
+.field-error-message,
+.field-success-message {
+  font-size: var(--fs-body-sm);
+  min-height: 1.4em;
+}
+
+.field-error-message {
+  color: var(--color-error);
+}
+
+.field-success-message {
+  color: var(--color-success);
+}
+
+.checkbox-field {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+}
+
+.checkbox-field input {
+  margin-top: 0.2em;
+  accent-color: var(--color-navy);
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+
+.checkbox-field label {
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-regular);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* ---------- Shared visual utilities ---------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-bottom: var(--space-sm);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 1.5em;
+  height: 1px;
+  background: currentColor;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border-on-light);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.divider--on-dark {
+  background: var(--color-border-on-dark);
+}
+
+.media-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-navy-08);
+}
+
+.media-frame img,
+.media-frame video {
+  width: 100%;
+  height: 100%;
+}
+
+.sr-count {
+  font-variant-numeric: tabular-nums;
+}

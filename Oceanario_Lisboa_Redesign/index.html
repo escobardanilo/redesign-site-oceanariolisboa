@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Oceanário de Lisboa — Redesign Conceptual | O oceano começa aqui</title>
+  <meta name="description" content="Redesign conceptual e não-oficial do website do Oceanário de Lisboa: uma experiência digital imersiva sobre exposições, espécies e conservação marinha, construída com GSAP." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://example.com/oceanario-lisboa-redesign/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Oceanário de Lisboa — Redesign Conceptual" />
+  <meta property="og:title" content="Oceanário de Lisboa — Redesign Conceptual" />
+  <meta property="og:description" content="Uma reinterpretação imersiva e não-oficial do website do Oceanário de Lisboa, com conteúdo real e animações cinematográficas em GSAP." />
+  <meta property="og:image" content="/assets/svg/media-placeholder.svg" />
+  <meta property="og:locale" content="pt_PT" />
+  <meta property="og:url" content="https://example.com/oceanario-lisboa-redesign/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Oceanário de Lisboa — Redesign Conceptual" />
+  <meta name="twitter:description" content="Redesign conceptual e não-oficial do website do Oceanário de Lisboa." />
+  <meta name="twitter:image" content="/assets/svg/media-placeholder.svg" />
+
+  <meta name="theme-color" content="#002056" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/favicon.svg" />
+
+  <!-- Linked directly (not JS-imported) so the page stays fully styled
+       even if JavaScript never runs. main.css @imports the nine layer
+       files in cascade order — see css/main.css for why a single
+       @import chain is used instead of nine separate <link> tags. -->
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <noscript>
+    <style>
+      /* Guarantees a no-JS visitor never gets stuck behind the preloader
+         or a pre-animation "hidden" state — see docs/ANIMATIONS.md. */
+      [data-preloader] { display: none !important; }
+      [data-menu] { display: none !important; }
+    </style>
+  </noscript>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Oceanário de Lisboa — Redesign Conceptual",
+      "description": "Redesign conceptual e não-oficial da experiência digital do Oceanário de Lisboa, produzido como exercício de storytelling digital e engenharia front-end.",
+      "inLanguage": "pt-PT",
+      "about": {
+        "@type": "TouristAttraction",
+        "name": "Oceanário de Lisboa",
+        "url": "https://www.oceanario.pt/",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Esplanada Dom Carlos I, s/nº, Doca dos Olivais",
+          "addressLocality": "Lisboa",
+          "postalCode": "1990-005",
+          "addressCountry": "PT"
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link btn btn-accent" href="#main-content">Saltar para o conteúdo principal</a>
+
+  <!--@include: html/components/preloader.html -->
+  <!--@include: html/components/header.html -->
+  <!--@include: html/components/menu.html -->
+
+  <main id="main-content">
+    <!--@include: html/sections/hero.html -->
+    <!--@include: html/sections/visit-info.html -->
+    <!--@include: html/sections/highlights.html -->
+    <!--@include: html/sections/exhibitions.html -->
+    <!--@include: html/sections/experiences.html -->
+    <!--@include: html/sections/conservation.html -->
+    <!--@include: html/sections/species.html -->
+    <!--@include: html/sections/recognition.html -->
+    <!--@include: html/sections/news.html -->
+    <!--@include: html/sections/plan-visit.html -->
+    <!--@include: html/sections/newsletter.html -->
+  </main>
+
+  <!--@include: html/components/footer.html -->
+  <!--@include: html/components/cookie-banner.html -->
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

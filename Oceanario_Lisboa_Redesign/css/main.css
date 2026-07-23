@@ -1,0 +1,23 @@
+/* ==========================================================================
+   MAIN — the single stylesheet entry linked from index.html.
+   Individual layers stay in their own files (per the project's required
+   folder structure) but are chained here via @import so the cascade
+   order is deterministic. A single <link> importing files in explicit
+   order is used instead of nine separate <link> tags because bundlers
+   are not guaranteed to preserve the relative order of independent
+   <link rel="stylesheet"> entries when merging them — verified against
+   this project's own build output, where accessibility.css's
+   overrides silently landed before components.css and lost the
+   cascade. @import order is deterministic and keeps that from
+   happening again.
+   ========================================================================== */
+
+@import './reset.css';
+@import './variables.css';
+@import './typography.css';
+@import './global.css';
+@import './layout.css';
+@import './components.css';
+@import './animations.css';
+@import './responsive.css';
+@import './accessibility.css';

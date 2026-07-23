@@ -1,0 +1,31 @@
+<section class="newsletter section" id="newsletter" data-newsletter-root aria-label="Newsletter">
+  <div class="container newsletter__grid">
+    <div>
+      <p class="text-label" style="color: var(--color-lime);" data-newsletter-eyebrow></p>
+      <h2 class="newsletter__title" data-newsletter-title></h2>
+      <p class="text-body" style="margin-top: var(--space-md); color: var(--color-mist-70);" data-newsletter-text></p>
+    </div>
+
+    <form class="newsletter__form" data-newsletter-form novalidate>
+      <div class="newsletter__row">
+        <div class="field field-on-dark">
+          <label for="newsletter-email">Email</label>
+          <input type="email" id="newsletter-email" name="email" required autocomplete="email" placeholder="o.seu@email.com" />
+        </div>
+        <button type="submit" class="btn btn-accent" data-magnetic="0.25">Subscrever</button>
+      </div>
+
+      <div class="checkbox-field">
+        <input type="checkbox" id="newsletter-consent" name="consent" required />
+        <label for="newsletter-consent">
+          Li e aceito a <a class="link-inline" data-newsletter-privacy target="_blank" rel="noopener noreferrer">política de privacidade</a>.
+        </label>
+      </div>
+
+      <p class="field-error-message" data-newsletter-error role="alert"></p>
+      <p class="field-success-message" data-newsletter-success role="status"></p>
+
+      <p class="newsletter__disclaimer" data-newsletter-disclaimer></p>
+    </form>
+  </div>
+</section>

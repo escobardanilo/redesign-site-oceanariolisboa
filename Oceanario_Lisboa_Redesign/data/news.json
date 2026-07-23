@@ -1,0 +1,52 @@
+{
+  "eyebrow": "Novidades",
+  "title": "O que se passa no Oceanário",
+  "text": "Destaques recentes — exposições, parcerias e datas assinaladas.",
+  "items": [
+    {
+      "key": "universo-submerso-lanca",
+      "category": "Exposições",
+      "title": "\"Universo Submerso\" traz uma nova instalação imersiva",
+      "excerpt": "Uma jornada de luz, som e projeção que liga o cosmos às profundezas do oceano chega ao piso superior do edifício.",
+      "href": "https://oceanario.pt/universo-submerso-nova-exposicao/",
+      "image": "assets/images/news/universo-submerso.jpg",
+      "imageAlt": "Instalação imersiva de luz Universo Submerso"
+    },
+    {
+      "key": "monstros-marinhos-noticia",
+      "category": "Exposições",
+      "title": "Monstros Marinhos ocupam o átrio principal até novembro",
+      "excerpt": "Réplicas à escala real de predadores pré-históricos, numa parceria com o Dino Parque Lourinhã, incluída no bilhete de entrada.",
+      "href": "https://oceanario.pt/exposicoes/monstros-marinhos/",
+      "image": "assets/images/news/monstros-marinhos.jpg",
+      "imageAlt": "Réplica de predador marinho pré-histórico"
+    },
+    {
+      "key": "florestas-submersas-encerra",
+      "category": "Exposições",
+      "title": "Florestas Submersas by Takashi Amano encerra após uma década",
+      "excerpt": "O maior aquário de água doce alguma vez construído despede-se a 30 de junho de 2026, depois de mais de dez anos a receber visitantes.",
+      "href": "https://oceanario.pt/florestas-submersas/",
+      "image": "assets/images/news/florestas-submersas.jpg",
+      "imageAlt": "Aquário de água doce da exposição Florestas Submersas by Takashi Amano"
+    },
+    {
+      "key": "rock-in-rio-parceria",
+      "category": "Parcerias",
+      "title": "Oceanário de Lisboa é parceiro oficial do Rock in Rio Lisboa 2026",
+      "excerpt": "Uma nova parceria leva a missão de conservação do Oceanário a um dos maiores palcos de eventos do país.",
+      "href": "https://oceanario.pt/oceanario-lisboa-rock-in-rio-lisboa-2026/",
+      "image": "assets/images/news/rock-in-rio.jpg",
+      "imageAlt": "Sinalética da parceria entre Oceanário de Lisboa e Rock in Rio Lisboa"
+    },
+    {
+      "key": "dia-mundial-oceano",
+      "category": "Conservação",
+      "title": "Dia Mundial do Oceano assinalado com atividades em família",
+      "excerpt": "Em parceria com a Fundação Oceano Azul, o Oceanário assinalou a data com um programa dedicado a famílias.",
+      "href": "https://oceanario.pt/dia-mundial-oceano/",
+      "image": "assets/images/news/dia-mundial-oceano.jpg",
+      "imageAlt": "Atividades em família no Dia Mundial do Oceano no Oceanário de Lisboa"
+    }
+  ]
+}

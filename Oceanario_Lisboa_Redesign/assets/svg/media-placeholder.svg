@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true">
+  <title>Espaço reservado para media oficial do Oceanário de Lisboa</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#002056" />
+      <stop offset="100%" stop-color="#001636" />
+    </linearGradient>
+    <linearGradient id="wave1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0dfc95" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#dafd6a" stop-opacity="0.15" />
+    </linearGradient>
+    <linearGradient id="wave2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff017f" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#0dfc95" stop-opacity="0.12" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)" />
+  <path d="M0 380 C 140 320, 260 440, 400 380 S 660 320, 800 380 V600 H0 Z" fill="url(#wave1)" />
+  <path d="M0 460 C 160 410, 300 500, 460 450 S 680 400, 800 460 V600 H0 Z" fill="url(#wave2)" />
+  <g opacity="0.5" stroke="#f1f1f1" stroke-width="1.4" fill="none">
+    <path d="M40 200 C 160 160, 220 240, 340 200 S 520 150, 640 205" />
+    <path d="M60 260 C 180 225, 240 300, 360 260 S 540 215, 700 265" opacity="0.6" />
+  </g>
+  <circle cx="400" cy="230" r="3" fill="#dafd6a" />
+  <circle cx="470" cy="255" r="2" fill="#f1f1f1" opacity="0.7" />
+  <circle cx="330" cy="270" r="2" fill="#f1f1f1" opacity="0.5" />
+</svg>

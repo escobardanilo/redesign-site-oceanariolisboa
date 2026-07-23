@@ -1,0 +1,73 @@
+{
+  "eyebrow": "Experiências",
+  "title": "Para lá da visita",
+  "text": "Programas para famílias, escolas e curiosos — cada um pensado para uma forma diferente de estar perto do oceano.",
+  "items": [
+    {
+      "key": "dormir-com-tuboroes",
+      "eyebrow": "Família · Noite",
+      "title": "Dormindo com os Tubarões",
+      "reveal": "Uma noite no Oceanário, junto ao tanque central, com exploração dos bastidores antes de dormir perto dos tubarões.",
+      "cta": "Saber mais",
+      "href": "https://oceanario.pt/en/activities/sleeping-with-sharks/",
+      "image": "assets/images/experiences/dormir-com-tuboroes.jpg",
+      "imageAlt": "Sacos-cama montados junto ao tanque central para a experiência Dormindo com os Tubarões",
+      "source": "https://oceanario.pt/en/activities/sleeping-with-sharks/"
+    },
+    {
+      "key": "visitas-guiadas",
+      "eyebrow": "Todos os públicos",
+      "title": "Visitas Guiadas",
+      "reveal": "Um educador de marinha acompanha o percurso pela exposição permanente, com histórias que não estão nos painéis informativos.",
+      "cta": "Saber mais",
+      "href": "https://oceanario.pt/visitas-guiadas/",
+      "image": "assets/images/experiences/visitas-guiadas.jpg",
+      "imageAlt": "Educador de marinha durante uma visita guiada ao Oceanário de Lisboa",
+      "source": "https://oceanario.pt/visitas-guiadas/"
+    },
+    {
+      "key": "oceano-60-minutos",
+      "eyebrow": "Fora de horas",
+      "title": "Oceano em 60 Minutos",
+      "reveal": "Uma visita guiada exclusiva ao final do dia, fora do horário normal de funcionamento, ao piso superior da exposição permanente.",
+      "cta": "Saber mais",
+      "href": "https://oceanario.pt/experiencias/familias/oceano-em-60-minutos/",
+      "image": "assets/images/experiences/oceano-60-minutos.jpg",
+      "imageAlt": "Visitantes numa visita guiada fora de horas ao Oceanário de Lisboa",
+      "source": "https://oceanario.pt/experiencias/familias/oceano-em-60-minutos/"
+    },
+    {
+      "key": "bilhete-combinado-telecabine",
+      "eyebrow": "Parque das Nações",
+      "title": "Oceanário + Telecabine de Lisboa",
+      "reveal": "Bilhete combinado com viagem de ida e volta na Telecabine de Lisboa, utilizável até 30 dias após a visita ao Oceanário.",
+      "cta": "Ver bilhete combinado",
+      "href": "https://oceanario.pt/en/buy-tickets/combined-ticket/",
+      "image": "assets/images/experiences/telecabine.jpg",
+      "imageAlt": "Cabines da Telecabine de Lisboa sobre o Parque das Nações",
+      "source": "https://oceanario.pt/en/buy-tickets/combined-ticket/"
+    },
+    {
+      "key": "visitas-escolares",
+      "eyebrow": "Escolas",
+      "title": "Visitas de Estudo",
+      "reveal": "Programas educativos ligados ao currículo escolar, complementados pela plataforma online Academia do Oceanário.",
+      "cta": "Saber mais",
+      "href": "https://oceanario.pt/programas/escolas/visitas-de-estudo/programas-no-oceanario/",
+      "image": "assets/images/experiences/visitas-escolares.jpg",
+      "imageAlt": "Grupo escolar em visita de estudo ao Oceanário de Lisboa",
+      "source": "https://oceanario.pt/programas/escolas/visitas-de-estudo/programas-no-oceanario/"
+    },
+    {
+      "key": "aniversarios",
+      "eyebrow": "Família · Celebrações",
+      "title": "Aniversários no Oceanário",
+      "reveal": "Festa de aniversário com visita guiada, lanche e jogos de temática marinha, com a mascote Vasco.",
+      "cta": "Saber mais",
+      "href": "https://oceanario.pt/",
+      "image": "assets/images/experiences/aniversarios.jpg",
+      "imageAlt": "Celebração de aniversário temática marinha no Oceanário de Lisboa",
+      "source": "https://oceanario.pt/"
+    }
+  ]
+}
