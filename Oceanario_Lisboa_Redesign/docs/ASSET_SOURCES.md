@@ -29,13 +29,16 @@ aqui. É exatamente esse o caminho seguido em todo o projeto:
 
 ## Como substituir um placeholder por media real
 
-1. Obtenha autorização junto do Oceanário de Lisboa / Fundação Oceano Azul
-   para o ficheiro em causa.
+1. Obtenha autorização para o ficheiro em causa (fotografia própria, ou
+   fotografia oficial do Oceanário de Lisboa / Fundação Oceano Azul com
+   permissão).
 2. Guarde o ficheiro em `assets/images/<secção>/` ou `assets/videos/<secção>/`
-   com o nome de ficheiro indicado na coluna "Ficheiro previsto" abaixo.
-3. Atualize o campo `image` (ou `media`) correspondente em `data/*.json` —
-   ver README.md → "Como substituir conteúdos".
-4. Atualize esta tabela: mude "Pendente" para "Autorizado" e adicione o
+   com **exatamente** o nome de ficheiro indicado na coluna "Ficheiro
+   previsto" abaixo — `js/content.js` procura automaticamente esse caminho
+   e usa-o em vez do placeholder assim que existir (`npm run dev`/`build`
+   outra vez). Só é preciso editar `data/*.json` se quiser usar um nome de
+   ficheiro diferente do sugerido — ver README.md → "Como adicionar imagens".
+3. Atualize esta tabela: mude "Pendente" para "Autorizado" e adicione o
    crédito exigido pelo detentor dos direitos.
 
 ## Registo de pendências

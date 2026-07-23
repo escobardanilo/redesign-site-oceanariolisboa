@@ -14,14 +14,33 @@ import { qs, qsa, formatIndex } from './utils.js';
  * fallback in their markup so the underlying information stays reachable
  * without JavaScript, per the project's accessibility rules.
  *
- * No real photography/video ships in this build (see docs/ASSET_SOURCES.md)
- * — every image renders through the local placeholder SVG so the console
- * never shows a 404, with real alt text describing the pending official
- * asset via `data-pending-asset`.
+ * Images: every `image`/`media` path in data/*.json is looked up against
+ * whatever real files actually exist under assets/images/ at build time
+ * (via import.meta.glob below). If the file is there, Vite bundles it and
+ * it's used as-is — no code change needed, just drop the file in with the
+ * exact name referenced in the JSON and rebuild. If it's not there yet,
+ * placeholderImg() falls back to the local placeholder SVG so the console
+ * never shows a 404, with real alt text and a `data-pending-asset` marker.
  */
 
-function placeholderImg({ alt = '', pending = '', className = 'media-placeholder-img' } = {}) {
-  return `<img class="${className}" src="${placeholderUrl}" alt="${alt}" loading="lazy" decoding="async" data-pending-asset="${pending}" width="800" height="600" />`;
+const officialImageModules = import.meta.glob('../assets/images/**/*.{jpg,jpeg,png,webp,avif}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+const officialImages = Object.fromEntries(
+  Object.entries(officialImageModules).map(([path, url]) => [path.replace(/^\.\.\//, ''), url])
+);
+
+function resolveImageSrc(pending) {
+  const realUrl = officialImages[pending];
+  return { src: realUrl || placeholderUrl, isPlaceholder: !realUrl };
+}
+
+function placeholderImg({ alt = '', pending = '', className = 'media-cover-img' } = {}) {
+  const { src, isPlaceholder } = resolveImageSrc(pending);
+  const pendingAttr = isPlaceholder ? ` data-pending-asset="${pending}"` : '';
+  return `<img class="${className}" src="${src}" alt="${alt}" loading="lazy" decoding="async"${pendingAttr} width="800" height="600" />`;
 }
 
 function iconMarkup(key) {
@@ -68,9 +87,12 @@ function renderMenu() {
   const visualWrap = qs('[data-menu-visual]');
   if (visualWrap) {
     visualWrap.innerHTML = content.nav.primary
-      .map(
-        (item) => `<img class="mega-menu__visual-img" data-menu-visual-img="${item.key}" src="${placeholderUrl}" data-pending-asset="${visualPending[item.key] || ''}" alt="" loading="lazy" />`
-      )
+      .map((item) => {
+        const pending = visualPending[item.key] || '';
+        const { src, isPlaceholder } = resolveImageSrc(pending);
+        const pendingAttr = isPlaceholder ? ` data-pending-asset="${pending}"` : '';
+        return `<img class="mega-menu__visual-img" data-menu-visual-img="${item.key}" src="${src}"${pendingAttr} alt="" loading="lazy" />`;
+      })
       .join('');
   }
 
@@ -268,7 +290,7 @@ function renderConservation() {
   }
 
   const media = qs('[data-conservation-media]', root);
-  if (media) media.innerHTML = placeholderImg({ alt: c.mediaAlt, pending: c.media, className: 'media-placeholder-img' });
+  if (media) media.innerHTML = placeholderImg({ alt: c.mediaAlt, pending: c.media, className: 'media-cover-img' });
 }
 
 function renderSpecies() {

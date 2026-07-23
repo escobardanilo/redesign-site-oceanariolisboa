@@ -122,21 +122,35 @@ esses ficheiros só têm elementos-contentor vazios (`data-*` hooks) para o
 
 ## Como adicionar imagens
 
-1. Guarde o ficheiro em `assets/images/<secção>/` (ou `assets/videos/` para
-   vídeo) — ver a estrutura de pastas e `docs/ASSET_SOURCES.md` para o
-   nome de ficheiro esperado por secção.
-2. Atualize o campo `image` (ou `media`) do item correspondente em
-   `data/*.json` para o caminho do novo ficheiro.
-3. Neste momento, todos os `<img>` do site apontam para um SVG placeholder
-   local (`assets/svg/media-placeholder.svg`) através de
-   `js/content.js` → `placeholderImg()`, precisamente para nunca haver um
-   `src` partido enquanto a fotografia oficial não é adicionada. Depois de
-   ter ficheiros reais, o passo mais direto é substituir essa função para
-   usar `item.image` como `src` (mantendo `loading="lazy"` e `alt`).
-4. Para vídeo de fundo no hero, `js/media.js` já tem a lógica pronta
+**Sim, pode inserir as suas próprias imagens diretamente — não precisa de
+pedir nem de tocar em código.** `js/content.js` procura, em build-time
+(`import.meta.glob`), qualquer ficheiro real dentro de `assets/images/**`;
+se encontrar um caminho que corresponda ao campo `image`/`media` de
+`data/*.json`, usa-o automaticamente em vez do placeholder — sem precisar
+de editar nenhum ficheiro `.js`.
+
+1. Guarde o ficheiro em `assets/images/<secção>/`, com **exatamente** o
+   nome já referido em `data/*.json` (e listado em
+   `docs/ASSET_SOURCES.md`) — por exemplo, `assets/images/species/peixe-lua.jpg`
+   para corresponder a `"image": "assets/images/species/peixe-lua.jpg"`
+   em `data/species.json`. Formatos aceites: `.jpg`, `.jpeg`, `.png`,
+   `.webp`, `.avif`.
+2. Corra `npm run dev` (ou `npm run build`) outra vez. Pronto — assim que o
+   Vite vir o ficheiro, esse cartão/painel passa a mostrar a imagem real; o
+   atributo `data-pending-asset` desaparece automaticamente desse elemento.
+3. Se preferir usar um nome de ficheiro diferente do sugerido, também pode
+   — só precisa de atualizar o campo `image`/`media` correspondente em
+   `data/*.json` para o caminho novo.
+4. **Importante**: use apenas imagens sobre as quais tem direitos (suas
+   próprias, ou fotografia oficial do Oceanário com autorização — ver
+   `docs/ASSET_SOURCES.md` sobre porque é que este repositório não inclui
+   fotografias reais por defeito).
+5. Para vídeo de fundo no hero, `js/media.js` já tem a lógica pronta
    (`initVideoVisibility`, `initLazyVideoSources`) à espera de um
    `<video data-auto-pause data-lazy-src="…">` — só é preciso trocar o
-   `<img>` estático em `html/sections/hero.html` por esse `<video>`.
+   `<img>` estático em `html/sections/hero.html` por esse `<video>` (este
+   caso, por ser único e não uma coleção repetida, não passa pelo mesmo
+   mecanismo automático dos outros cartões).
 
 ## Como editar animações
 

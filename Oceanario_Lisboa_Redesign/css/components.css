@@ -1299,7 +1299,7 @@
    corresponding official photo is sourced (see docs/ASSET_SOURCES.md).
    Using a real local SVG — instead of a broken path — keeps markup and
    the console honest: no 404s, real alt text, real loading attributes. */
-.media-placeholder-img {
+.media-cover-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
