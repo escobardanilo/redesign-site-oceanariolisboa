@@ -4,9 +4,12 @@
    third-party hotlinking. font-display: swap is set by Fontsource itself.
    ========================================================================== */
 
-@import '@fontsource/instrument-serif';
-@import '@fontsource/instrument-serif/400-italic.css';
-@import '@fontsource-variable/inter';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/400-italic.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/500-italic.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/800.css';
 
 html {
   font-family: var(--font-body);
@@ -17,19 +20,29 @@ html {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: var(--fw-regular);
+  font-weight: var(--fw-extrabold);
   line-height: var(--lh-tight);
   letter-spacing: var(--ls-tight);
+  /* Overrides reset.css's defensive overflow-wrap: break-word — combined
+     with text-wrap: balance below, it let the balancing algorithm split a
+     long word (e.g. "compreendido") mid-word to even out line lengths
+     once Poppins Extra Bold made words render wider than before. Headings
+     here are always normal prose, never unbreakable strings, so breaking
+     only at real word boundaries is the safer default. */
+  overflow-wrap: normal;
+  word-break: keep-all;
   text-wrap: balance;
 }
 
 p {
+  font-weight: var(--fw-regular);
   line-height: var(--lh-relaxed);
   max-width: var(--measure);
 }
 
 .text-display-2xl {
   font-family: var(--font-display);
+  font-weight: var(--fw-extrabold);
   font-size: var(--fs-display-2xl);
   line-height: 0.98;
   letter-spacing: -0.03em;
@@ -37,6 +50,7 @@ p {
 
 .text-display-xl {
   font-family: var(--font-display);
+  font-weight: var(--fw-extrabold);
   font-size: var(--fs-display-xl);
   line-height: 1.02;
   letter-spacing: -0.02em;
@@ -44,33 +58,39 @@ p {
 
 .text-display-lg {
   font-family: var(--font-display);
+  font-weight: var(--fw-extrabold);
   font-size: var(--fs-display-lg);
   line-height: 1.05;
 }
 
 .text-display-md {
   font-family: var(--font-display);
+  font-weight: var(--fw-extrabold);
   font-size: var(--fs-display-md);
   line-height: 1.1;
 }
 
 .text-display-sm {
   font-family: var(--font-display);
+  font-weight: var(--fw-extrabold);
   font-size: var(--fs-display-sm);
   line-height: 1.2;
 }
 
 .text-body-lg {
+  font-weight: var(--fw-regular);
   font-size: var(--fs-body-lg);
   line-height: var(--lh-relaxed);
 }
 
 .text-body {
+  font-weight: var(--fw-regular);
   font-size: var(--fs-body);
   line-height: var(--lh-relaxed);
 }
 
 .text-body-sm {
+  font-weight: var(--fw-regular);
   font-size: var(--fs-body-sm);
   line-height: var(--lh-normal);
 }

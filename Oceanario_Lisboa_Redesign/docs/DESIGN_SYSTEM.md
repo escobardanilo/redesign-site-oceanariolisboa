@@ -35,11 +35,24 @@ verdade a divergir.
 
 ## Tipografia
 
-- **Display**: Instrument Serif — usado apenas em títulos (`h1`–`h3`,
-  `.text-display-*`), nunca em corpo de texto ou UI. Só existe no peso 400
-  (regular) + itálico; a hierarquia vem de tamanho/tracking, não de peso.
-- **Corpo/UI**: Inter Variable — toda a navegação, botões, parágrafos,
-  formulários, etiquetas.
+- **Uma só família, dois papéis**: Poppins para tudo — títulos e corpo de
+  texto partilham a mesma família, diferenciados por peso, não por
+  tipo de letra.
+  - **Títulos** (`h1`–`h6`, `.text-display-*`, wordmark, valores de
+    destaque): Poppins **Extra Bold** (`--fw-extrabold`, 800). É o peso
+    mais usado nos elementos que precisam de presença — incluindo
+    números/valores de destaque (`.conservation__stat-value`,
+    `.quick-info__value`) e o próprio logótipo tipográfico.
+  - **Corpo/UI**: Poppins **Regular** (400) em parágrafos, **Medium**
+    (500) em citações/itálicos (`.milestone__statement`), **Semibold**
+    (600) em botões e etiquetas em caixa alta.
+  - `h1`–`h6` sobrepõem o `overflow-wrap: break-word` defensivo do
+    `reset.css` para `normal` + `word-break: keep-all` — combinado com
+    `text-wrap: balance`, o peso Extra Bold tornou palavras longas
+    (ex.: "compreendido") largas o suficiente para o algoritmo de
+    balanceamento as partir a meio, o que lia mal; títulos são sempre
+    prosa normal, nunca strings não-quebráveis, por isso quebrar só em
+    limites de palavra é a opção mais segura aqui.
 - Escala fluida via `clamp()` em `--fs-display-2xl` … `--fs-label` — nunca
   tamanhos fixos. Ver `css/variables.css` para os valores min/preferred/max
   de cada nível.
@@ -105,8 +118,12 @@ scrim. Variam no aspect-ratio e no que é revelado no hover:
   none)` em `accessibility.css`).
 - `.news-card` — 4:3, sem overlay — texto abaixo da imagem, estilo
   editorial simples.
-- `.species-card` — 3:4, estado `.is-active` (opacidade/escala) controlado
-  por `IntersectionObserver` em `js/sliders.js`.
+- `.species-card` — 3:4. Dois modos, ver `docs/ANIMATIONS.md`: em ecrãs
+  ≥900px com movimento ativo, a secção fica pinada e os cartões cruzam
+  em opacidade/escala conforme o progresso do scroll (`.species--sticky`,
+  `js/scroll-effects.js`); caso contrário, estado `.is-active`
+  (opacidade/escala) controlado por `IntersectionObserver` num carrossel
+  de arrastar nativo (`js/sliders.js`).
 
 ## Grid
 

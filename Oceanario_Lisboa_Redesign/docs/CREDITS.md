@@ -44,10 +44,9 @@ ou incluído neste projeto.
 Auto-hospedada via [Fontsource](https://fontsource.org/) (pacotes npm),
 sem hotlinking a serviços de terceiros:
 
-- **Instrument Serif** — tipo de letra de display, licença
-  [SIL Open Font License 1.1](https://fonts.google.com/specimen/Instrument+Serif/about).
-- **Inter** — tipo de letra de texto corrido/interface, licença
-  [SIL Open Font License 1.1](https://fonts.google.com/specimen/Inter/about).
+- **Poppins** — usado tanto para títulos (peso Extra Bold) como para
+  corpo de texto/UI (pesos Regular a Semibold), licença
+  [SIL Open Font License 1.1](https://fonts.google.com/specimen/Poppins/about).
 
 ## Bibliotecas e ferramentas
 

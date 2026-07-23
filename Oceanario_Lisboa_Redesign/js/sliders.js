@@ -2,15 +2,23 @@ import { isReducedMotion } from './gsap-config.js';
 import { qs, qsa, clamp } from './utils.js';
 
 /**
- * Species gallery: a natively-scrollable, scroll-snapped track (works
- * with zero JS — touch swipe and trackpad scroll are native browser
- * behaviour) enhanced with desktop pointer-drag, prev/next buttons,
+ * Species gallery — drag/swipe mode: a natively-scrollable, scroll-snapped
+ * track (works with zero JS — touch swipe and trackpad scroll are native
+ * browser behaviour) enhanced with desktop pointer-drag, prev/next buttons,
  * keyboard arrows and an IntersectionObserver-driven "active card" state.
+ *
+ * This is the fallback for mobile/tablet and for reduced-motion; on
+ * desktop with motion allowed, js/scroll-effects.js → initSpeciesScroll()
+ * uses the pinned "sticky scroll" mode instead. Both share the same
+ * markup, so this returns a cleanup function — gsap.matchMedia() (in
+ * scroll-effects.js) calls it when the viewport crosses back into this
+ * mode's range, and needs every listener/observer torn down cleanly
+ * rather than stacking duplicates.
  */
-export function initSpeciesGallery() {
+export function initSpeciesGalleryDrag() {
   const stage = qs('[data-species-stage]');
   const track = qs('[data-species-track]');
-  if (!stage || !track) return;
+  if (!stage || !track) return () => {};
 
   const prevBtn = qs('[data-species-prev]');
   const nextBtn = qs('[data-species-next]');
@@ -52,10 +60,12 @@ export function initSpeciesGallery() {
   );
   cards().forEach((card) => observer.observe(card));
 
-  prevBtn?.addEventListener('click', () => scrollToIndex(activeIndex - 1));
-  nextBtn?.addEventListener('click', () => scrollToIndex(activeIndex + 1));
+  const onPrevClick = () => scrollToIndex(activeIndex - 1);
+  const onNextClick = () => scrollToIndex(activeIndex + 1);
+  prevBtn?.addEventListener('click', onPrevClick);
+  nextBtn?.addEventListener('click', onNextClick);
 
-  stage.addEventListener('keydown', (event) => {
+  const onStageKeydown = (event) => {
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       scrollToIndex(activeIndex + 1);
@@ -63,15 +73,17 @@ export function initSpeciesGallery() {
       event.preventDefault();
       scrollToIndex(activeIndex - 1);
     }
-  });
+  };
+  stage.addEventListener('keydown', onStageKeydown);
 
   // Desktop pointer drag-to-scroll — touch already scrolls natively via CSS.
   let isDown = false;
   let moved = false;
   let startX = 0;
   let startScroll = 0;
+  let suppressClick = null;
 
-  track.addEventListener('pointerdown', (event) => {
+  const onPointerDown = (event) => {
     if (event.pointerType === 'touch') return;
     isDown = true;
     moved = false;
@@ -79,31 +91,46 @@ export function initSpeciesGallery() {
     startScroll = track.scrollLeft;
     stage.classList.add('is-dragging');
     track.setPointerCapture(event.pointerId);
-  });
+  };
 
-  track.addEventListener('pointermove', (event) => {
+  const onPointerMove = (event) => {
     if (!isDown) return;
     const delta = event.clientX - startX;
     if (Math.abs(delta) > 4) moved = true;
     track.scrollLeft = startScroll - delta;
-  });
+  };
 
-  function endDrag() {
+  const endDrag = () => {
     if (!isDown) return;
     isDown = false;
     stage.classList.remove('is-dragging');
     if (moved) {
-      const suppressClick = (event) => {
+      suppressClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
       };
       track.addEventListener('click', suppressClick, { capture: true, once: true });
     }
-  }
+  };
+  track.addEventListener('pointerdown', onPointerDown);
+  track.addEventListener('pointermove', onPointerMove);
   track.addEventListener('pointerup', endDrag);
   track.addEventListener('pointerleave', endDrag);
 
   setActive(0);
+
+  return () => {
+    observer.disconnect();
+    prevBtn?.removeEventListener('click', onPrevClick);
+    nextBtn?.removeEventListener('click', onNextClick);
+    stage.removeEventListener('keydown', onStageKeydown);
+    track.removeEventListener('pointerdown', onPointerDown);
+    track.removeEventListener('pointermove', onPointerMove);
+    track.removeEventListener('pointerup', endDrag);
+    track.removeEventListener('pointerleave', endDrag);
+    if (suppressClick) track.removeEventListener('click', suppressClick, { capture: true });
+    stage.classList.remove('is-dragging');
+  };
 }
 
 /** Recognition (milestones) slider — one statement at a time, gentle autoplay. */
@@ -187,7 +214,9 @@ export function initHighlightsScroller() {
 }
 
 export function initSliders() {
-  initSpeciesGallery();
+  // Species gallery is initialized by js/scroll-effects.js → initSpeciesScroll(),
+  // which picks between this module's drag mode and the desktop sticky-scroll
+  // mode via gsap.matchMedia() — see the doc comment on initSpeciesGalleryDrag().
   initRecognitionSlider();
   initHighlightsScroller();
 }

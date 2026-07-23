@@ -50,8 +50,8 @@ passam a um fade rápido (`DURATION.fast` ou menos) sem deslocamento.
 | Conservação — título/texto | `[data-conservation-title]`, parágrafos | `ScrollTrigger` (`top 70%`, once) | 0.9s / 0.7s stagger 0.12s | `expo.out` | Igual | 0.3s/0.2s, sem deslocamento |
 | Conservação — imagem clip-path | `[data-conservation-media]` | Mesmo trigger, timeline conjunta | 1.3s | `expo.out` | Igual | 0.3s, sem clip inicial |
 | Conservação — contador | `[data-count-to]` | `ScrollTrigger` (`top 85%`, once) por stat | `DURATION.cinematic` (1.8s) | `power2.out` | Igual | 0.4s |
-| Espécies — entrada da secção | `[data-species-stage]` | `ScrollTrigger` (`top 85%`, once) | `DURATION.base` | `standard` | Igual | Sem deslocamento |
-| Espécies — galeria (drag/estado ativo) | `.species-card` | Pointer drag, scroll nativo, teclado | Transições CSS 0.6s (opacidade/escala) | `expo.out` (CSS) | Swipe nativo + botões prev/next | `scrollTo` usa `behavior:'auto'`, sem swipe momentum extra |
+| Espécies — sticky scroll (desktop) | `[data-species-pin]`, `.species-card` | `ScrollTrigger` pin+scrub (`gsap.matchMedia`, ≥900px, motion ativo) | Ligado ao scroll (`scrub: 0.6`), ~500px de scroll por espécie | linear (scrub) + `closeness³` para o nome/latim | **Substituído** pelo modo drag nativo (`<900px`) | Cai automaticamente no modo drag nativo |
+| Espécies — galeria (drag/estado ativo) | `.species-card` | Pointer drag, scroll nativo, teclado | Transições CSS 0.6s (opacidade/escala) | `expo.out` (CSS) | Modo por omissão (swipe nativo + botões prev/next) | `scrollTo` usa `behavior:'auto'`, sem swipe momentum extra |
 | Reconhecimento — slider | `.milestone` | Clique/dots/autoplay 7s | Transição CSS (`display` toggle, sem tween) | — | Igual | Autoplay desativado |
 | Menu — máscara de entrada | `[data-menu]` (clip-path) | Clique no `[data-menu-toggle]` | `DURATION.slow` (1.2s) | `expo.out` | Igual | `clip-path` final imediato |
 | Menu — stagger dos itens | `[data-menu-link]` | Mesma timeline, offset `-=0.55` | `DURATION.base`, stagger 0.055s | `expo.out` | Igual | Sem deslocamento |
@@ -71,6 +71,23 @@ fazer `document.documentElement.scrollWidth` exceder o viewport mesmo com
 `overflow: hidden` em todos os antecessores — o Chromium continua a
 contar os limites visuais pós-transformação para o "scrollable overflow"
 neste caso. Ver `css/components.css` (comentário em `.hero__media`).
+
+### Nota sobre o sticky scroll das espécies
+
+Em vez de uma timeline com passos de duração fixa, o modo pinado usa
+`self.progress` do `ScrollTrigger` para calcular um "índice virtual"
+(`progress × (n − 1)`) e define a opacidade de cada cartão como
+`clamp(1 − |índice_virtual − i|, 0, 1)` — um crossfade contínuo,
+diretamente amarrado à posição de scroll, não a uma animação a decorrer
+sozinha. O nome/nome científico usa `closeness³` em vez do valor linear:
+dois nomes de espécies parcialmente visíveis ao mesmo tempo leem-se mal
+(texto sobreposto), onde duas fotografias parcialmente cruzadas continuam
+legíveis — por isso o texto "aparece"/"desaparece" de forma mais abrupta
+do que a imagem. Os botões prev/next e as setas do teclado chamam
+`ScrollTrigger.scrollTo`-equivalente (via Lenis ou `window.scrollTo`)
+para a posição de scroll correspondente ao passo pretendido, lendo
+sempre `trigger.progress` ao vivo em vez de guardar um índice à parte,
+para nunca dessincronizar de scroll livre.
 
 ## Limpeza e performance
 

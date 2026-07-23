@@ -1,6 +1,7 @@
-import { gsap, ScrollTrigger, EASE, isReducedMotion } from './gsap-config.js';
-import { qs, qsa, formatIndex } from './utils.js';
+import { gsap, ScrollTrigger, EASE, isReducedMotion, getLenis } from './gsap-config.js';
+import { qs, qsa, formatIndex, clamp } from './utils.js';
 import { fadeUp, countUp } from './animations.js';
+import { initSpeciesGalleryDrag } from './sliders.js';
 
 /**
  * All ScrollTrigger wiring lives here, one function per section. Each is
@@ -169,16 +170,113 @@ export function initConservationScroll() {
   });
 }
 
-/** Species stage: fade/scale entrance only — drag/keyboard logic lives in sliders.js. */
-export function initSpeciesReveal() {
+/**
+ * Species: pinned "sticky scroll" on desktop with motion allowed — the
+ * section stays fixed while cards crossfade in place, scrubbed to scroll
+ * progress (not a fixed-duration animation, so it stays tied to exactly
+ * how far the user has scrolled). Mobile/tablet and reduced-motion fall
+ * back to the native drag/swipe track (js/sliders.js) — pinning a
+ * multi-step sequence on a small screen or for a user who asked for less
+ * motion is exactly what the reduced-motion and mobile rules in
+ * docs/ANIMATIONS.md warn against.
+ */
+export function initSpeciesScroll() {
   const root = qs('[data-species-root]');
+  const pinTarget = qs('[data-species-pin]', root || undefined);
+  const track = qs('[data-species-track]', root || undefined);
   const stage = qs('[data-species-stage]', root || undefined);
-  if (!root || !stage) return;
+  if (!root || !pinTarget || !track || !stage) return;
 
-  fadeUp(stage, {
-    y: 24,
-    scrollTrigger: { trigger: stage, start: 'top 85%', once: true },
-  });
+  const counterCurrent = qs('[data-species-counter-current]', root);
+  const progressFill = qs('[data-species-progress-fill]', root);
+  const prevBtn = qs('[data-species-prev]', root);
+  const nextBtn = qs('[data-species-next]', root);
+
+  function setCounter(index, total) {
+    if (counterCurrent) counterCurrent.textContent = formatIndex(index + 1);
+    if (prevBtn) prevBtn.disabled = index === 0;
+    if (nextBtn) nextBtn.disabled = index === total - 1;
+  }
+
+  function setupSticky() {
+    const cards = qsa('[data-species-card]', track);
+    const n = cards.length;
+    if (!n) return () => {};
+
+    root.classList.add('species--sticky');
+    const labels = cards.map((card) => card.querySelector('.species-card__label')).filter(Boolean);
+    gsap.set(cards, { opacity: 0, scale: 0.94 });
+    gsap.set(labels, { opacity: 0 });
+    gsap.set(cards[0], { opacity: 1, scale: 1 });
+    if (labels[0]) gsap.set(labels[0], { opacity: 1 });
+    setCounter(0, n);
+
+    const distancePerStep = 500; // px of scroll per species step
+
+    const trigger = ScrollTrigger.create({
+      trigger: pinTarget,
+      start: 'top top',
+      end: () => `+=${Math.max(n - 1, 1) * distancePerStep}`,
+      pin: true,
+      scrub: 0.6,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const virtual = self.progress * (n - 1);
+        cards.forEach((card, i) => {
+          const closeness = clamp(1 - Math.abs(virtual - i), 0, 1);
+          gsap.set(card, { opacity: closeness, scale: 0.94 + closeness * 0.06 });
+          // The name/latin label uses a steeper falloff (closeness³) than the
+          // image: two names both partway visible read as illegible overlap,
+          // where two partially-crossfaded photos still read fine.
+          const label = card.querySelector('.species-card__label');
+          if (label) gsap.set(label, { opacity: closeness ** 3 });
+        });
+        setCounter(Math.round(virtual), n);
+        if (progressFill) progressFill.style.width = `${self.progress * 100}%`;
+      },
+    });
+
+    function goToIndex(index) {
+      const target = clamp(index, 0, n - 1);
+      const progress = n > 1 ? target / (n - 1) : 0;
+      const scrollPos = trigger.start + (trigger.end - trigger.start) * progress;
+      const lenis = getLenis();
+      if (lenis) lenis.scrollTo(scrollPos, { duration: isReducedMotion() ? 0 : 1 });
+      else window.scrollTo({ top: scrollPos, behavior: isReducedMotion() ? 'auto' : 'smooth' });
+    }
+
+    const currentIndex = () => Math.round(trigger.progress * (n - 1));
+    const onPrev = () => goToIndex(currentIndex() - 1);
+    const onNext = () => goToIndex(currentIndex() + 1);
+    prevBtn?.addEventListener('click', onPrev);
+    nextBtn?.addEventListener('click', onNext);
+
+    const onKeydown = (event) => {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        goToIndex(currentIndex() + 1);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        goToIndex(currentIndex() - 1);
+      }
+    };
+    stage.addEventListener('keydown', onKeydown);
+
+    return () => {
+      trigger.kill();
+      prevBtn?.removeEventListener('click', onPrev);
+      nextBtn?.removeEventListener('click', onNext);
+      stage.removeEventListener('keydown', onKeydown);
+      root.classList.remove('species--sticky');
+      gsap.set(cards, { clearProps: 'all' });
+      gsap.set(labels, { clearProps: 'all' });
+    };
+  }
+
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 900px)', () => (isReducedMotion() ? initSpeciesGalleryDrag() : setupSticky()));
+  mm.add('(max-width: 899.98px)', () => initSpeciesGalleryDrag());
 }
 
 /** Recalculates all ScrollTriggers after layout-affecting async work (fonts, dynamic render). */
@@ -196,6 +294,6 @@ export function initAllScrollEffects() {
   initQuickInfoLines();
   initExhibitionsScroll();
   initConservationScroll();
-  initSpeciesReveal();
+  initSpeciesScroll();
   refreshOnSettle();
 }

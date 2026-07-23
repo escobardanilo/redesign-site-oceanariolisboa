@@ -155,6 +155,12 @@
 
   .newsletter__row {
     flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  .newsletter__row .field {
+    flex-basis: auto;
   }
 
   .cookie-banner {
