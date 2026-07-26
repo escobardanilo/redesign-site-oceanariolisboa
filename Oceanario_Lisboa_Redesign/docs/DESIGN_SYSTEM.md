@@ -111,8 +111,10 @@ legibilidade (`linear-gradient`) sobre a imagem, corpo posicionado sobre o
 scrim. Variam no aspect-ratio e no que é revelado no hover:
 
 - `.highlight-card` — 4:5, título+CTA sempre visíveis.
-- `.exhibition-panel` — imagem + texto lado a lado (grid 2 colunas),
-  dentro da narrativa horizontal.
+- `.exhibition-panel` — imagem + texto lado a lado (flex row), dentro da
+  narrativa horizontal pinada. A imagem é dimensionada pela altura
+  disponível (`height: 100%` + `aspect-ratio`), não pela largura — ver
+  nota em `docs/ANIMATIONS.md` sobre o orçamento de altura do pin.
 - `.experience-card` — 4:3, um parágrafo extra revela-se no hover/focus
   (desktop) mas está sempre visível em ecrãs sem hover (`@media (hover:
   none)` em `accessibility.css`).

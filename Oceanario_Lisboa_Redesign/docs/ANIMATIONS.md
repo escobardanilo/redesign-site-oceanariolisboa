@@ -72,6 +72,33 @@ fazer `document.documentElement.scrollWidth` exceder o viewport mesmo com
 contar os limites visuais pós-transformação para o "scrollable overflow"
 neste caso. Ver `css/components.css` (comentário em `.hero__media`).
 
+### Nota sobre o orçamento de altura das exposições
+
+`[data-exhibitions-pin]` fica com `height: 100svh` e `display: flex;
+flex-direction: column`, dividido entre o bloco de cabeçalho (`flex: 0 0
+auto`, altura natural) e a faixa de painéis (`flex: 1 1 auto`, ocupa o
+resto). A imagem de cada painel (`.exhibition-panel__media`) segue
+`height: 100%` + `aspect-ratio`, isto é, a altura vem do espaço que
+sobra depois do cabeçalho, e a largura é derivada — nunca o inverso.
+
+Isto corrige um bug em que a imagem media ficava quase invisível durante
+o scroll pinado: o painel usava `aspect-ratio: 4/5` a partir de uma
+largura fixa em `vw`, e o bloco de cabeçalho não tinha orçamento de
+altura nenhum (a `.section-header__copy` partilhada tem `max-width:
+44ch`, mas herda o `font-size` de 16px do próprio `div`, não do `h2`
+lá dentro — a 64px de Poppins Extra Bold isso são ~440px de largura,
+o suficiente para partir "Um só oceano, quatro habitats" em quatro
+linhas curtas). Título e imagem juntos exigiam mais altura do que
+qualquer viewport de portátil tinha para dar, empurrando a imagem quase
+inteira para fora do ecrã. A correção teve três partes: `max-width:
+none` no título só dentro de `.exhibitions__head` (não no seletor
+partilhado, para não afetar outras secções), `.exhibition-panel__title`
+a usar `--fs-display-md` em vez de `--fs-display-lg` (era o token
+errado — `--fs-display-lg` é para títulos de secção, não de card), e a
+imagem a herdar altura do espaço sobrante em vez de a impor a partir da
+largura. Testado em alturas de viewport de 768px a 1080px (900px de
+largura, o corte do `matchMedia` do modo pin) sem cortar o CTA.
+
 ### Nota sobre o sticky scroll das espécies
 
 Em vez de uma timeline com passos de duração fixa, o modo pinado usa

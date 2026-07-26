@@ -569,6 +569,18 @@
 .exhibitions__pin {
   position: relative;
   overflow: hidden;
+  height: 100svh;
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+}
+
+.exhibitions__head-block {
+  flex: 0 0 auto;
+  /* Once pinned, this box's top edge locks to the viewport top for the
+     whole horizontal narrative — same fixed-header collision the hero
+     solves on the flex container itself (see .hero for the full note). */
+  padding-top: calc(var(--header-height) + var(--space-md));
 }
 
 .exhibitions__head {
@@ -576,6 +588,19 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
+}
+
+.exhibitions__head .section-header__copy {
+  /* .section-header__copy's 44ch cap is meant for a 16px body-text
+     context; it doesn't know its child here is a 64px display heading,
+     so it was squeezing "Um só oceano, quatro habitats" into ~440px and
+     wrapping it across 4 short lines. Harmless in normal sections where
+     height is unconstrained, but this head block shares a fixed 100svh
+     budget with the exhibition panels below it while pinned, so the
+     extra wrapped lines were starving the panels of room. */
+  max-width: none;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .exhibitions__counter {
@@ -606,22 +631,32 @@
 
 .exhibitions__track {
   display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
   flex-wrap: nowrap;
+  align-items: stretch;
   gap: var(--space-lg);
   margin-top: var(--space-xl);
   will-change: transform;
 }
 
 .exhibition-panel {
-  flex: 0 0 min(82vw, 900px);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  flex: 0 0 min(88vw, 960px);
+  display: flex;
+  align-items: stretch;
   gap: var(--space-xl);
-  align-items: center;
 }
 
 .exhibition-panel__media {
   position: relative;
+  flex: 0 0 auto;
+  /* Height-driven, not width-driven: the panel's height comes from
+     whatever the pinned viewport actually has left after the head
+     block, and the image's width follows from aspect-ratio. Sizing
+     from width (old: flex-basis in vw + aspect-ratio) let the demanded
+     height grow past short/laptop viewports, pushing the image mostly
+     below the fold while pinned — see docs/ANIMATIONS.md. */
+  height: 100%;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -632,6 +667,14 @@
   height: 100%;
 }
 
+.exhibition-panel__copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .exhibition-panel__index {
   font-family: var(--font-display);
   font-size: var(--fs-display-sm);
@@ -640,7 +683,7 @@
 
 .exhibition-panel__title {
   margin-top: var(--space-sm);
-  font-size: var(--fs-display-lg);
+  font-size: var(--fs-display-md);
 }
 
 .exhibition-panel__text {
@@ -650,11 +693,25 @@
 }
 
 .exhibition-panel__cta {
-  margin-top: var(--space-lg);
+  margin-top: var(--space-md);
 }
 
-/* Mobile / reduced-motion fallback: native horizontal snap scroller instead of pin+scrub */
+/* Mobile / reduced-motion fallback: native horizontal snap scroller instead of pin+scrub.
+   No pinning ever happens in this mode, so the 100svh + flex-column split
+   above (built for the fixed-position pin) is undone in favour of normal
+   document flow, and panels stack media-over-copy per card. */
+.exhibitions--slider .exhibitions__pin {
+  height: auto;
+  min-height: 0;
+  display: block;
+}
+
+.exhibitions--slider .exhibitions__head-block {
+  padding-top: var(--space-section);
+}
+
 .exhibitions--slider .exhibitions__track {
+  flex: initial;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   transform: none !important;
@@ -667,7 +724,8 @@
 
 .exhibitions--slider .exhibition-panel {
   scroll-snap-align: center;
-  grid-template-columns: 1fr;
+  flex-direction: column;
+  height: auto;
 }
 
 /* ---------- Experiences ---------- */
