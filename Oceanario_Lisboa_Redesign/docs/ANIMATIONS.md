@@ -99,6 +99,26 @@ imagem a herdar altura do espaço sobrante em vez de a impor a partir da
 largura. Testado em alturas de viewport de 768px a 1080px (900px de
 largura, o corte do `matchMedia` do modo pin) sem cortar o CTA.
 
+Essa gama de teste (768–1080px) escondeu um segundo bug do mesmo
+género: abaixo de ~700px de altura, o próprio bloco de copy de cada
+painel (índice + eyebrow + título + texto + CTA) passou a exceder a
+altura que a imagem lhe deixava, e `.exhibitions__pin` tem
+`overflow: hidden`. Com `.exhibition-panel__copy` em `justify-content:
+center`, esse excesso partia-se a meio — e a metade de baixo, cortada,
+era exatamente o botão CTA. A causa de fundo era outra vez um
+`max-width` em `ch` a ignorar o contentor real:
+`.exhibition-panel__text` tinha `max-width: 46ch` (~460px) num
+contentor de ~700px, obrigando o parágrafo a 4–5 linhas quando cabia em
+3–4 na largura disponível. Correção: sem `max-width` em
+`.exhibition-panel__text` no modo pin (a coluna já vem limitada pela
+largura do painel, tal como o título), `justify-content: flex-end` em
+vez de `center` (se ainda faltar altura nalgum extremo, é o
+índice/eyebrow a perder espaço, nunca o CTA), e um `max-width: 58ch`
+reposto só em `.exhibitions--slider .exhibition-panel__text`, onde o
+modo slider empilha media sobre copy sem essa coluna estreita e um
+parágrafo a toda a largura do cartão ficaria demasiado comprido para
+ler. Testado sem overflow em alturas de 600px a 1080px.
+
 ### Nota sobre o sticky scroll das espécies
 
 Em vez de uma timeline com passos de duração fixa, o modo pinado usa

@@ -672,7 +672,13 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* flex-end, not center: on short viewports the copy stack (index +
+     eyebrow + title + text + CTA) can still exceed the height the image
+     leaves it, and .exhibitions__pin clips overflow. Anchoring to the
+     bottom means that overflow always eats into the index/eyebrow first,
+     never the CTA — losing a decorative label reads fine, a vanished
+     button doesn't. */
+  justify-content: flex-end;
 }
 
 .exhibition-panel__index {
@@ -689,7 +695,11 @@
 .exhibition-panel__text {
   margin-top: var(--space-md);
   color: var(--color-mist-70);
-  max-width: 46ch;
+  /* No max-width cap: .exhibition-panel__copy is already width-bound by
+     the flex row (image takes its share via aspect-ratio, this takes the
+     rest — see docs/ANIMATIONS.md), so a reading-measure cap here is the
+     same mistake the section title had — it was rewrapping onto a fifth
+     line for no reason, on top of a height budget that's already tight. */
 }
 
 .exhibition-panel__cta {
@@ -720,6 +730,16 @@
 
 .exhibitions--slider .exhibitions__track::-webkit-scrollbar {
   display: none;
+}
+
+.exhibitions--slider .exhibition-panel__text {
+  /* The pin mode's unconstrained width relies on the flex row leaving a
+     wide, fixed copy column (~700px on desktop) that a reading-measure
+     cap would only wrap early. Slider mode stacks media over copy with
+     no such column — on a portrait tablet (up to 899px wide) the card
+     can approach that same width, so this reinstates a comfortable cap
+     for that context specifically. */
+  max-width: 58ch;
 }
 
 .exhibitions--slider .exhibition-panel {
