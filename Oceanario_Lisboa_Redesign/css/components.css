@@ -598,44 +598,62 @@
 }
 
 .exhibition-panel {
-  flex: 0 0 min(88vw, 960px);
-  display: flex;
-  align-items: stretch;
-  gap: var(--space-xl);
+  position: relative;
+  flex: 0 0 auto;
+  /* Height-driven, not width-driven, same as before and for the same
+     reason (see docs/ANIMATIONS.md): the panel's height comes from
+     whatever the pinned viewport actually has left after the head
+     block, and width follows from the aspect-ratio. A FIXED width
+     (flex-basis in vw, like the old layout used) can't shrink, so on a
+     short viewport the demanded height grows past what's available and
+     the panel overflows instead of settling for a smaller one — the
+     same bug this fixed on the species stage. max-width is a ceiling
+     for spacious viewports, not what drives the size day to day. */
+  height: 100%;
+  aspect-ratio: 1330 / 661;
+  max-width: min(88vw, 1330px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .exhibition-panel__media {
-  position: relative;
-  flex: 0 0 auto;
-  /* Height-driven, not width-driven: the panel's height comes from
-     whatever the pinned viewport actually has left after the head
-     block, and the image's width follows from aspect-ratio. Sizing
-     from width (old: flex-basis in vw + aspect-ratio) let the demanded
-     height grow past short/laptop viewports, pushing the image mostly
-     below the fold while pinned — see docs/ANIMATIONS.md. */
-  height: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
 }
 
 .exhibition-panel__media img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+.exhibition-panel__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 10, 28, 0) 35%, rgba(0, 10, 28, 0.92) 100%);
 }
 
 .exhibition-panel__copy {
-  flex: 1 1 auto;
+  position: relative;
+  z-index: 1;
+  height: 100%;
   min-width: 0;
+  max-width: 46ch;
   display: flex;
   flex-direction: column;
   /* flex-end, not center: on short viewports the copy stack (index +
-     eyebrow + title + text + CTA) can still exceed the height the image
-     leaves it, and .exhibitions__pin clips overflow. Anchoring to the
-     bottom means that overflow always eats into the index/eyebrow first,
-     never the CTA — losing a decorative label reads fine, a vanished
-     button doesn't. */
+     eyebrow + title + text + CTA) can still exceed the panel's height,
+     and .exhibitions__pin clips overflow. Anchoring to the bottom means
+     that overflow always eats into the index/eyebrow first, never the
+     CTA — losing a decorative label reads fine, a vanished button
+     doesn't. */
   justify-content: flex-end;
+  padding: var(--space-lg);
+}
+
+.exhibition-panel__category {
+  margin-top: var(--space-2xs);
+  color: var(--color-lime);
 }
 
 .exhibition-panel__index {
@@ -652,11 +670,11 @@
 .exhibition-panel__text {
   margin-top: var(--space-md);
   color: var(--color-mist-70);
-  /* No max-width cap: .exhibition-panel__copy is already width-bound by
-     the flex row (image takes its share via aspect-ratio, this takes the
-     rest — see docs/ANIMATIONS.md), so a reading-measure cap here is the
-     same mistake the section title had — it was rewrapping onto a fifth
-     line for no reason, on top of a height budget that's already tight. */
+  /* No cap of its own — inherits the 46ch measure from
+     .exhibition-panel__copy, which now has to set one deliberately:
+     copy overlays the full-bleed image instead of sharing a flex row
+     with it, so without a cap text would stretch across the whole
+     ~1330px-wide panel. */
 }
 
 .exhibition-panel__cta {
@@ -689,20 +707,15 @@
   display: none;
 }
 
-.exhibitions--slider .exhibition-panel__text {
-  /* The pin mode's unconstrained width relies on the flex row leaving a
-     wide, fixed copy column (~700px on desktop) that a reading-measure
-     cap would only wrap early. Slider mode stacks media over copy with
-     no such column — on a portrait tablet (up to 899px wide) the card
-     can approach that same width, so this reinstates a comfortable cap
-     for that context specifically. */
-  max-width: 58ch;
-}
-
 .exhibitions--slider .exhibition-panel {
+  /* Pin mode's panel is a wide 1330:661 banner sized from the pinned
+     viewport's leftover height; nothing here is pinned, so it gets its
+     own mobile-appropriate portrait card instead — same shape the other
+     card carousels on this page use (.highlight-card, .species-card). */
   scroll-snap-align: center;
-  flex-direction: column;
+  flex: 0 0 min(86vw, 420px);
   height: auto;
+  aspect-ratio: 4 / 5;
 }
 
 /* ---------- Experiences ---------- */

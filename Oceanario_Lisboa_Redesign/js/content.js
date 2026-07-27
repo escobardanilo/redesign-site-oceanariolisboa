@@ -179,9 +179,10 @@ function renderExhibitions() {
         (item) => `
       <article class="exhibition-panel" data-exhibition-panel>
         <div class="exhibition-panel__media">${placeholderImg({ alt: item.imageAlt, pending: item.image })}</div>
+        <div class="exhibition-panel__scrim"></div>
         <div class="exhibition-panel__copy">
           <span class="exhibition-panel__index">${formatIndex(item.index)}</span>
-          <p class="text-label" style="margin-top: var(--space-2xs); color: var(--color-lime);">${item.category}</p>
+          <p class="exhibition-panel__category text-label">${item.category}</p>
           <h3 class="exhibition-panel__title">${item.title}</h3>
           <p class="exhibition-panel__text">${item.text}</p>
           <a class="btn btn-outline btn-on-dark exhibition-panel__cta" href="${item.cta.href}" target="_blank" rel="noopener noreferrer">${item.cta.label}</a>
