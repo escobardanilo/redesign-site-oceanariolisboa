@@ -136,6 +136,30 @@ para a posição de scroll correspondente ao passo pretendido, lendo
 sempre `trigger.progress` ao vivo em vez de guardar um índice à parte,
 para nunca dessincronizar de scroll livre.
 
+### Nota sobre o "scatter to grid" das novidades
+
+Os 5 cartões de `.news__grid` arrancam sobrepostos ao centro da grelha —
+deslocados, rodados, a 0.8× de escala — e o scroll dispersa-os até à
+posição CSS real de cada um (`initNewsScatter`, `scroll-effects.js`),
+com `stagger: { each: 0.2, from: 'random' }` para que não cheguem todos
+ao mesmo tempo. O deslocamento inicial de cada cartão vem de
+`offsetLeft`/`offsetTop` relativos a `.news__grid` (por isso a grelha
+precisa de `position: relative` — ver `components.css`), não de
+`getBoundingClientRect()`: aqueles refletem só a posição no fluxo do
+layout, nunca o transform que o GSAP está a aplicar, pelo que
+`invalidateOnRefresh: true` pode voltar a medir a meio do scrub (ex.: um
+resize que muda a grelha de 3 para 2 colunas) sem que o novo cálculo
+seja contaminado pela posição intermédia em que o scrub já ia.
+
+O intervalo do `ScrollTrigger` (`top 85%` → `bottom 65%`) está amarrado
+à altura da própria grelha, não a percentagens fixas do viewport: uma
+grelha com duas linhas (5 cartões em 3 colunas) precisa de mais
+distância de scroll para revelar a segunda linha do que uma com todos
+os cartões numa única linha. Uma primeira tentativa com percentagens
+fixas do viewport (`center 80%` → `center 15%`) deixava a segunda linha
+ainda a meio caminho muito depois de a grelha já ter saído da zona
+confortável do ecrã.
+
 ## Limpeza e performance
 
 - `ScrollTrigger.batch` é usado para revelações repetidas em vez de um

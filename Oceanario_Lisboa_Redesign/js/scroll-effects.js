@@ -171,6 +171,71 @@ export function initConservationScroll() {
 }
 
 /**
+ * News: cards start gathered at the grid's center — offset, rotated,
+ * scaled down — and scrub apart into their real CSS grid position as the
+ * section scrolls through (a "scatter to grid" reveal, not the generic
+ * [data-reveal] fade-up the cards used before this).
+ *
+ * Offsets come from each card's offsetLeft/offsetTop rather than
+ * getBoundingClientRect(): those reflect layout-flow position only, never
+ * the transform GSAP is actively driving, so invalidateOnRefresh can
+ * safely re-measure and recompute mid-scrub (e.g. a resize that reflows
+ * the grid from 3 columns to 2) without the "from" values themselves
+ * being thrown off by whatever position the scrub had already reached.
+ * Requires .news__grid to be a positioned element (see components.css)
+ * so offsetLeft/offsetTop resolve relative to it, not some ancestor.
+ */
+export function initNewsScatter() {
+  const root = qs('[data-news-root]');
+  const grid = qs('[data-news-grid]', root || undefined);
+  if (!root || !grid) return;
+
+  const cards = qsa('[data-news-card]', grid);
+  if (!cards.length) return;
+
+  if (isReducedMotion()) {
+    ScrollTrigger.batch(cards, {
+      start: 'top 85%',
+      once: true,
+      onEnter: (batch) => fadeUp(batch, { stagger: 0.08 }),
+    });
+    return;
+  }
+
+  const ROTATIONS = [-11, 8, -6, 12, -8, 5];
+
+  gsap.from(cards, {
+    x: (i, target) => grid.clientWidth / 2 - (target.offsetLeft + target.offsetWidth / 2),
+    y: (i, target) => grid.clientHeight / 2 - (target.offsetTop + target.offsetHeight / 2),
+    rotation: (i) => ROTATIONS[i % ROTATIONS.length],
+    scale: 0.8,
+    duration: 0.8,
+    // Long relative to duration, so at any given scroll position the
+    // cards read as a spread-out gradient of "how settled" rather than
+    // clumping into "already there" vs. "hasn't budged" with nothing
+    // legible in between.
+    stagger: { each: 0.2, from: 'random' },
+    ease: 'none',
+    scrollTrigger: {
+      trigger: grid,
+      // Tied to the grid's own height rather than fixed viewport
+      // percentages: 'top 85%' to 'bottom 65%' is exactly "from where the
+      // pile first has room to be seen" to "once the grid's own bottom
+      // has cleared most of the viewport" — long enough on a two-row grid
+      // for the staggered reveal above to fully resolve, short enough
+      // that it doesn't drag on well past the point the grid has mostly
+      // scrolled by (the previous viewport-percentage-only range let a
+      // two-row grid's second row still be mid-flight after most of the
+      // section had already scrolled out of view).
+      start: 'top 85%',
+      end: 'bottom 65%',
+      scrub: 0.6,
+      invalidateOnRefresh: true,
+    },
+  });
+}
+
+/**
  * Species: pinned "sticky scroll" on desktop with motion allowed — the
  * section stays fixed while cards crossfade in place, scrubbed to scroll
  * progress (not a fixed-duration animation, so it stays tied to exactly
@@ -295,5 +360,6 @@ export function initAllScrollEffects() {
   initExhibitionsScroll();
   initConservationScroll();
   initSpeciesScroll();
+  initNewsScatter();
   refreshOnSettle();
 }

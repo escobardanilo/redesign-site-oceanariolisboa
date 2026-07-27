@@ -1237,8 +1237,16 @@
 
 .news__grid {
   display: grid;
+  /* Positioned so each card's offsetLeft/offsetTop resolve relative to
+     the grid itself — js/scroll-effects.js → initNewsScatter() reads
+     those to compute how far each card starts from the grid's center. */
+  position: relative;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
+}
+
+.news-card {
+  will-change: transform;
 }
 
 .news-card__media {

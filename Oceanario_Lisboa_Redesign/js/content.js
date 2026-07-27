@@ -360,7 +360,7 @@ function renderNews() {
     grid.innerHTML = newsData.items
       .map(
         (item) => `
-      <article class="news-card" data-reveal>
+      <article class="news-card" data-news-card>
         <a href="${item.href}" target="_blank" rel="noopener noreferrer">
           <div class="news-card__media">${placeholderImg({ alt: item.imageAlt, pending: item.image })}</div>
           <div class="news-card__meta text-label">
