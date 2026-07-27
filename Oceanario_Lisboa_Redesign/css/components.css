@@ -203,171 +203,74 @@
   transform: translateY(-6.25px) rotate(-45deg);
 }
 
-/* ---------- Fullscreen mega menu ---------- */
+/* ---------- Side menu ----------
+   Deliberately plain: a slide-in panel with one list of links, nothing
+   else — no visual imagery, no footer/contact block. The old fullscreen
+   mega menu (2-col grid, large display type, footer with contact/social)
+   is preserved in git history if that direction is ever wanted back. */
 
-.mega-menu {
+.site-menu {
   position: fixed;
   inset: 0;
   z-index: var(--z-menu-overlay);
-  background: var(--color-navy);
-  color: var(--color-background);
   visibility: hidden;
-  clip-path: inset(0 0 100% 0);
 }
 
-.mega-menu.is-open {
+.site-menu.is-open {
   visibility: visible;
 }
 
-.mega-menu__backdrop {
+.site-menu__backdrop {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  background: var(--color-navy);
+  opacity: 0;
   cursor: default;
 }
 
-.mega-menu__inner {
-  position: relative;
-  z-index: 1;
+.site-menu__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
   height: 100%;
+  width: min(30rem, 88vw);
   display: flex;
   flex-direction: column;
-  padding-top: calc(var(--header-height) + var(--space-md));
-  padding-bottom: var(--space-lg);
+  justify-content: center;
+  background: var(--color-navy);
+  color: var(--color-background);
+  padding-inline: var(--space-xl);
+  box-shadow: -32px 0 64px rgba(0, 8, 24, 0.28);
 }
 
-.mega-menu__layout {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  /* Without an explicit row track, grid sizes the (only) implicit row to
-     "auto" — its content's natural height — same overflow shape as the
-     old .mega-menu__nav bug, one level up: the row happily grows past
-     whatever .mega-menu__layout's flex: 1 actually allocated. minmax(0,
-     1fr) instead pins the row to that allocation, so it can shrink. */
-  grid-template-rows: minmax(0, 1fr);
-  gap: var(--space-xl);
-  align-items: center;
-  min-height: 0;
-}
-
-/* The actual grid item here is the <nav> wrapper (html/components/menu.html)
-   — .mega-menu__nav is the <ul> one level inside it. align-self only means
-   anything on a grid/flex item itself, so putting it on the <ul> was a
-   no-op: the <nav> stayed unconstrained (align-items: center, sized to
-   content) and just centered its oversized child across the row's
-   bounds, overflowing above and below it symmetrically. display: flex
-   here makes <nav> a flex container for that one child, so the default
-   align-items: stretch takes over and the <ul> actually fills it. */
-.mega-menu__layout > nav {
-  display: flex;
-  align-self: stretch;
-  min-height: 0;
-}
-
-.mega-menu__nav {
+.site-menu__nav {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  /* min-height: 0 lets it shrink to the space <nav> above now actually
-     constrains it to; overflow-y is the backstop for whatever six links
-     at the desktop font-size still don't fit (mainly short, wide
-     viewports — see .mega-menu__link). */
-  min-height: 0;
+  max-height: calc(100svh - var(--header-height) - var(--space-xl));
   overflow-y: auto;
 }
 
-.mega-menu__item {
+.site-menu__item {
   border-top: 1px solid var(--color-border-on-dark);
 }
 
-.mega-menu__item:last-child {
+.site-menu__item:last-child {
   border-bottom: 1px solid var(--color-border-on-dark);
 }
 
-.mega-menu__link {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-md);
-  /* Both clamps scale off viewport WIDTH (vw), same as the desktop
-     ≥1024px breakpoint they belong to, but what actually has to fit six
-     stacked links is viewport HEIGHT — a wide-but-short window (a laptop
-     at native resolution, an ultrawide that isn't maximized) hits the
-     ceiling from width alone with no regard for how little vertical
-     room is actually there. Old ceiling (4rem font / 1.4rem padding)
-     needed ~850px just for the nav list; this one needs ~530px, which
-     fits every desktop-width viewport this project targets down to
-     700px tall. .mega-menu__nav's overflow-y is still the backstop for
-     anything shorter than that. */
-  padding-block: clamp(0.5rem, 0.4rem + 0.6vw, 1rem);
+.site-menu__link {
+  display: block;
+  padding-block: var(--space-sm);
   font-family: var(--font-display);
-  font-weight: var(--fw-extrabold);
-  font-size: clamp(1.75rem, 1.3rem + 1.2vw, 2.75rem);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-display-sm);
   transition: color var(--dur-base) var(--ease-standard), padding-left var(--dur-base) var(--ease-out-expo);
 }
 
-.mega-menu__index {
-  font-family: var(--font-body);
-  font-size: var(--fs-label);
-  color: var(--color-mist-70);
-  transform: translateY(-0.6em);
-}
-
-.mega-menu__link:hover,
-.mega-menu__link:focus-visible {
+.site-menu__link:hover,
+.site-menu__link:focus-visible {
   color: var(--color-lime);
   padding-left: var(--space-sm);
-}
-
-.mega-menu__visual {
-  position: relative;
-  /* Was min(60vh, 620px) — independent of the row it sits in, so on a
-     short viewport it could demand more height than .mega-menu__layout
-     actually had, pushing the grid row (and nav next to it) past the
-     footer. align-self: stretch fills whatever the row's now-capped
-     height is (see .mega-menu__layout); 620px stays as the ceiling for
-     tall viewports so the image doesn't grow unreasonably large. */
-  align-self: stretch;
-  height: min(100%, 620px);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--color-navy-90);
-}
-
-.mega-menu__visual-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity var(--dur-slow) var(--ease-standard);
-}
-
-.mega-menu__visual-img.is-active {
-  opacity: 1;
-}
-
-.mega-menu__footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--space-md);
-  padding-top: var(--space-lg);
-  border-top: 1px solid var(--color-border-on-dark);
-  font-size: var(--fs-body-sm);
-  color: var(--color-mist-70);
-}
-
-.mega-menu__footer a:hover,
-.mega-menu__footer a:focus-visible {
-  color: var(--color-lime);
-}
-
-.mega-menu__socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm) var(--space-md);
 }
 
 /* ---------- Hero ---------- */

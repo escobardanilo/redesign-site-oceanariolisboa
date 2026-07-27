@@ -65,49 +65,12 @@ function renderMenu() {
   if (list) {
     list.innerHTML = content.nav.primary
       .map(
-        (item, i) => `
-      <li class="mega-menu__item">
-        <a class="mega-menu__link" href="${item.href}" data-menu-link="${item.key}" data-menu-close>
-          <span class="mega-menu__index">${formatIndex(i + 1)}</span>
-          <span>${item.label}</span>
-        </a>
+        (item) => `
+      <li class="site-menu__item">
+        <a class="site-menu__link" href="${item.href}" data-menu-link="${item.key}" data-menu-close>${item.label}</a>
       </li>`
       )
       .join('');
-  }
-
-  const visualPending = {
-    planear: 'assets/images/visit/planeie-a-visita.jpg',
-    exposicoes: exhibitionsData.items[0]?.image,
-    experiencias: experiencesData.items[0]?.image,
-    conservacao: content.conservation.media,
-    especies: speciesData.items[0]?.image,
-    novidades: newsData.items[0]?.image,
-  };
-  const visualWrap = qs('[data-menu-visual]');
-  if (visualWrap) {
-    visualWrap.innerHTML = content.nav.primary
-      .map((item) => {
-        const pending = visualPending[item.key] || '';
-        const { src, isPlaceholder } = resolveImageSrc(pending);
-        const pendingAttr = isPlaceholder ? ` data-pending-asset="${pending}"` : '';
-        return `<img class="mega-menu__visual-img" data-menu-visual-img="${item.key}" src="${src}"${pendingAttr} alt="" loading="lazy" />`;
-      })
-      .join('');
-  }
-
-  const footer = qs('[data-menu-footer]');
-  if (footer) {
-    footer.innerHTML = `
-      <div class="stack" data-menu-footer-anim>
-        <a class="link-inline" href="${content.contact.emailHref}">${content.contact.email}</a>
-        <a class="link-inline" href="${content.contact.phoneHref}">${content.contact.phone}</a>
-        <a class="link-inline" href="https://oceanario.pt/en/" target="_blank" rel="noopener noreferrer">English version (official site)</a>
-      </div>
-      <div class="mega-menu__socials" data-menu-footer-anim>
-        ${content.social.map((s) => `<a href="${s.href}" target="_blank" rel="noopener noreferrer">${s.label}</a>`).join('')}
-      </div>
-    `;
   }
 }
 

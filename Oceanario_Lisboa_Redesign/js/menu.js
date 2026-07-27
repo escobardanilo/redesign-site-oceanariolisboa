@@ -1,12 +1,12 @@
 import { gsap, EASE, DURATION, isReducedMotion, setScrollLocked } from './gsap-config.js';
-import { qs, qsa, hasFinePointer } from './utils.js';
+import { qs, qsa } from './utils.js';
 import { createFocusTrap, pushEscapeHandler, popEscapeHandler } from './accessibility.js';
 
 /**
- * Fullscreen immersive menu: mask reveal, staggered item entrance,
- * hover-linked visuals (desktop only), focus trap, Escape-to-close.
- * The footer's static nav (html/components/footer.html) is the
- * no-JS-safe navigation fallback — this overlay is progressive
+ * Simple slide-in side menu: backdrop fade + panel slide from the right,
+ * a short staggered entrance on the links themselves, focus trap,
+ * Escape-to-close. The footer's static nav (html/components/footer.html)
+ * is the no-JS-safe navigation fallback — this overlay is progressive
  * enhancement on top of it.
  */
 export function initMenu() {
@@ -15,9 +15,16 @@ export function initMenu() {
   const header = qs('[data-site-header]');
   if (!toggle || !menu) return;
 
+  const backdrop = qs('[data-menu-backdrop]', menu);
+  const panel = qs('.site-menu__panel', menu);
   const links = qsa('[data-menu-link]', menu);
-  const visuals = qsa('[data-menu-visual-img]', menu);
-  const footerEls = qsa('[data-menu-footer-anim]', menu);
+
+  // Reversing the open timeline at normal speed took ~1.9s (backdrop +
+  // panel + the full link stagger, all played backward) — fine for an
+  // entrance, sluggish for a dismiss. Closing plays that same timeline
+  // at CLOSE_SPEED so it reads as snappy without needing a second,
+  // separately-tuned close animation.
+  const CLOSE_SPEED = 2.5;
 
   let isOpen = false;
   let timeline = null;
@@ -27,26 +34,16 @@ export function initMenu() {
     const tl = gsap.timeline({ paused: true });
 
     if (isReducedMotion()) {
-      tl.set(menu, { clipPath: 'inset(0 0 0% 0)' });
-      tl.set(links, { clearProps: 'all' });
+      tl.set(backdrop, { opacity: 0.6 }).set(panel, { xPercent: 0 }).set(links, { autoAlpha: 1, x: 0 });
       return tl;
     }
 
-    tl.set(menu, { clipPath: 'inset(0 0 100% 0)' })
-      .to(menu, { clipPath: 'inset(0 0 0% 0)', duration: DURATION.slow, ease: EASE.expo })
-      .from(
-        links,
-        { yPercent: 115, duration: DURATION.base, ease: EASE.expo, stagger: 0.055 },
-        '-=0.55'
-      )
-      .from(footerEls, { autoAlpha: 0, y: 16, duration: DURATION.fast, stagger: 0.05 }, '-=0.35');
+    tl.set(panel, { xPercent: 100 })
+      .to(backdrop, { opacity: 0.6, duration: DURATION.base, ease: EASE.standard }, 0)
+      .to(panel, { xPercent: 0, duration: DURATION.slow, ease: EASE.expo }, 0)
+      .from(links, { autoAlpha: 0, x: 24, duration: DURATION.base, ease: EASE.expo, stagger: 0.045 }, '-=0.5');
 
     return tl;
-  }
-
-  function setActiveVisual(key) {
-    if (!visuals.length) return;
-    visuals.forEach((img) => img.classList.toggle('is-active', img.dataset.menuVisualImg === key));
   }
 
   function open() {
@@ -60,7 +57,7 @@ export function initMenu() {
     setScrollLocked(true);
 
     timeline = buildTimeline();
-    timeline.play(0);
+    timeline.timeScale(1).play(0);
 
     focusTrap = createFocusTrap(menu, toggle);
     focusTrap.activate();
@@ -76,11 +73,17 @@ export function initMenu() {
     header?.classList.remove('is-menu-open');
     popEscapeHandler(close);
     focusTrap?.deactivate();
+    // Unlocked immediately, not deferred to the close animation finishing:
+    // a click on a [data-menu-link] fires this handler and navigation.js's
+    // smooth-scroll handler on the same element, in that order, and Lenis
+    // being stopped from open() made lenis.scrollTo() silently no-op if
+    // the unlock hadn't happened yet — the link's own scroll never ran.
+    // Nothing else here depends on the reverse animation's timing.
+    setScrollLocked(false);
 
     const playback = timeline;
     const finish = () => {
       menu.classList.remove('is-open');
-      setScrollLocked(false);
     };
 
     if (isReducedMotion() || !playback) {
@@ -89,21 +92,12 @@ export function initMenu() {
     }
 
     playback.eventCallback('onReverseComplete', finish);
-    playback.reverse();
+    playback.timeScale(CLOSE_SPEED).reverse();
   }
 
   toggle.addEventListener('click', () => (isOpen ? close() : open()));
 
-  menu.querySelector('[data-menu-backdrop]')?.addEventListener('click', close);
-
-  links.forEach((link) => {
-    if (!hasFinePointer()) return;
-    const key = link.dataset.menuLink;
-    link.addEventListener('mouseenter', () => setActiveVisual(key));
-    link.addEventListener('focus', () => setActiveVisual(key));
-  });
-
-  if (visuals[0]) visuals[0].classList.add('is-active');
+  backdrop?.addEventListener('click', close);
 
   qsa('[data-menu-close]', menu).forEach((el) => el.addEventListener('click', close));
 

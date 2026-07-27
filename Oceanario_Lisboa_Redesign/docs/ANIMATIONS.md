@@ -53,9 +53,10 @@ passam a um fade rápido (`DURATION.fast` ou menos) sem deslocamento.
 | Espécies — sticky scroll (desktop) | `[data-species-pin]`, `.species-card` | `ScrollTrigger` pin+scrub (`gsap.matchMedia`, ≥900px, motion ativo) | Ligado ao scroll (`scrub: 0.6`), ~500px de scroll por espécie | linear (scrub) + `closeness³` para o nome/latim | **Substituído** pelo modo drag nativo (`<900px`) | Cai automaticamente no modo drag nativo |
 | Espécies — galeria (drag/estado ativo) | `.species-card` | Pointer drag, scroll nativo, teclado | Transições CSS 0.6s (opacidade/escala) | `expo.out` (CSS) | Modo por omissão (swipe nativo + botões prev/next) | `scrollTo` usa `behavior:'auto'`, sem swipe momentum extra |
 | Reconhecimento — slider | `.milestone` | Clique/dots/autoplay 7s | Transição CSS (`display` toggle, sem tween) | — | Igual | Autoplay desativado |
-| Menu — máscara de entrada | `[data-menu]` (clip-path) | Clique no `[data-menu-toggle]` | `DURATION.slow` (1.2s) | `expo.out` | Igual | `clip-path` final imediato |
-| Menu — stagger dos itens | `[data-menu-link]` | Mesma timeline, offset `-=0.55` | `DURATION.base`, stagger 0.055s | `expo.out` | Igual | Sem deslocamento |
-| Menu — rodapé | `[data-menu-footer-anim]` | Mesma timeline, offset `-=0.35` | `DURATION.fast` | `expo.out` | Igual | Sem deslocamento |
+| Menu — fade do backdrop | `[data-menu-backdrop]` | Clique no `[data-menu-toggle]` | `DURATION.base` (0.8s) | `standard` | Igual | Opacidade final imediata |
+| Menu — slide do painel | `.site-menu__panel` (`xPercent`) | Mesma timeline | `DURATION.slow` (1.2s) | `expo.out` | Igual | Posição final imediata |
+| Menu — stagger dos links | `[data-menu-link]` | Mesma timeline, offset `-=0.5` | `DURATION.base`, stagger 0.045s | `expo.out` | Igual | Sem deslocamento |
+| Novidades — scatter to grid | `[data-news-card]` | `ScrollTrigger` scrub (`top 95%` → `top 45%`) | Ligado ao scroll (`scrub: 0.5`), stagger 0.06s | linear (scrub) | Ativo | **Substituído** por reveal genérico `[data-reveal]`-like (`fadeUp`, stagger 0.08s) |
 | Botões magnéticos | `[data-magnetic]` | `mousemove`/`mouseleave` | `gsap.quickTo`, 0.6s | `power2.out` | Desativado (requer `hover:hover` e `pointer:fine`) | Desativado |
 | Cursor contextual | `.cursor-dot` | `pointermove` + `[data-cursor-explore]` | `gsap.quickTo`, 0.45s | `power2.out` | Desativado (mesmo motivo) | Desativado |
 | Cookie banner — saída | `[data-cookie-banner]` | Clique em aceitar/recusar | `DURATION.fast` | GSAP `to` (default) | Igual | Instantâneo, sem deslocamento (curta o suficiente para não necessitar de ramo próprio) |

@@ -19,7 +19,7 @@ verdade a divergir.
 
 - `#f1f1f1` é a base de todas as secções "light" (`.section--light`,
   quick-info, experiências, espécies, novidades, planear visita).
-- `#002056` é a base de todas as secções "dark" (hero, mega-menu,
+- `#002056` é a base de todas as secções "dark" (hero, menu lateral,
   exposições, conservação, newsletter, footer, preloader).
 - As três cores de acento **nunca aparecem todas na mesma secção**. Cada
   secção escura usa no máximo um acento dominante: `--color-lime` no hero

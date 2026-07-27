@@ -6,12 +6,15 @@
   },
   "nav": {
     "primary": [
-      { "key": "planear", "label": "Planear Visita", "href": "#plan-visit" },
+      { "key": "antes-de-vir", "label": "Antes de vir", "href": "#visit-info" },
+      { "key": "novidades-2026", "label": "Novidades 2026", "href": "#highlights" },
       { "key": "exposicoes", "label": "Exposições", "href": "#exhibitions" },
       { "key": "experiencias", "label": "Experiências", "href": "#experiences" },
       { "key": "conservacao", "label": "Conservação", "href": "#conservation" },
       { "key": "especies", "label": "Espécies", "href": "#species" },
-      { "key": "novidades", "label": "Novidades", "href": "#news" }
+      { "key": "novidades", "label": "Novidades", "href": "#news" },
+      { "key": "informacao-pratica", "label": "Informação prática", "href": "#plan-visit" },
+      { "key": "junte-se", "label": "Junte-se a Nós", "href": "#newsletter" }
     ],
     "tickets": { "label": "Comprar bilhetes", "href": "https://tickets.oceanario.pt/" }
   },
