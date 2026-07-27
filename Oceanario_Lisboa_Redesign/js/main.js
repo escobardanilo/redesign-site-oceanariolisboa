@@ -114,7 +114,6 @@ function initNewsletterForm() {
 
 function boot() {
   initSmoothScroll();
-  initNavigation();
   initMenu();
   initSliders();
   initMedia();
@@ -125,6 +124,13 @@ function boot() {
 
   runHeroIntro();
   initAllScrollEffects();
+  // After initAllScrollEffects: initNavigation's per-section header-theme
+  // triggers (js/navigation.js) measure section positions at creation
+  // time, and exhibitions/species pin their own scroll distance via a
+  // spacer only initAllScrollEffects has inserted by this point — created
+  // earlier, every section after either pin measured short by however
+  // much scroll distance that pin's spacer hadn't been given yet.
+  initNavigation();
 }
 
 function start() {
