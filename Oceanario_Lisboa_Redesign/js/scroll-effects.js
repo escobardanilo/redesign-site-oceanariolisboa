@@ -209,27 +209,26 @@ export function initNewsScatter() {
     y: (i, target) => grid.clientHeight / 2 - (target.offsetTop + target.offsetHeight / 2),
     rotation: (i) => ROTATIONS[i % ROTATIONS.length],
     scale: 0.8,
-    duration: 0.8,
-    // Long relative to duration, so at any given scroll position the
-    // cards read as a spread-out gradient of "how settled" rather than
-    // clumping into "already there" vs. "hasn't budged" with nothing
-    // legible in between.
-    stagger: { each: 0.2, from: 'random' },
+    duration: 0.5,
+    stagger: { each: 0.06, from: 'random' },
     ease: 'none',
     scrollTrigger: {
       trigger: grid,
-      // Tied to the grid's own height rather than fixed viewport
-      // percentages: 'top 85%' to 'bottom 65%' is exactly "from where the
-      // pile first has room to be seen" to "once the grid's own bottom
-      // has cleared most of the viewport" — long enough on a two-row grid
-      // for the staggered reveal above to fully resolve, short enough
-      // that it doesn't drag on well past the point the grid has mostly
-      // scrolled by (the previous viewport-percentage-only range let a
-      // two-row grid's second row still be mid-flight after most of the
-      // section had already scrolled out of view).
-      start: 'top 85%',
-      end: 'bottom 65%',
-      scrub: 0.6,
+      // Short and near the very top of the section, deliberately
+      // decoupled from the grid's own height: the reveal is meant to
+      // read as a quick "arrival" moment, resolved well before the grid
+      // has scrolled through the viewport, not something still playing
+      // out as the user is already on their way past the section. Two
+      // earlier attempts tied the range to the full grid/viewport height
+      // (start/end at the grid's top and bottom, or at fixed viewport
+      // percentages spanning most of the screen) and both left the
+      // second row of a two-row grid mid-flight well after the section
+      // had mostly scrolled by — a fixed, short distance like this one
+      // is what actually keeps "done dispersing" ahead of "still in
+      // view", regardless of how many rows the grid has.
+      start: 'top 95%',
+      end: 'top 45%',
+      scrub: 0.5,
       invalidateOnRefresh: true,
     },
   });
