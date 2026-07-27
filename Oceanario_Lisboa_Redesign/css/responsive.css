@@ -124,6 +124,14 @@
     grid-template-columns: 1fr;
   }
 
+  .highlights__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlight-card {
+    max-width: 100%;
+  }
+
   .species-card {
     flex-basis: min(72vw, 300px);
   }
@@ -214,8 +222,25 @@
   }
 
   .highlight-card {
-    flex-basis: 84vw;
-    aspect-ratio: 3 / 4;
+    /* Landscape 760.4:580 gets too short at this width for the overlaid
+       category+title+text+CTA stack — the copy would clip against
+       .highlight-card's overflow:hidden before the button did, and the
+       Portuguese body copy is long enough that a taller-but-still-fixed
+       ratio only postpones the same clipping at a bigger zoom/font size.
+       A stacked frame (image on its own row, copy in normal flow below)
+       removes the height budget instead of chasing it. */
+    aspect-ratio: auto;
+    display: block;
+  }
+
+  .highlight-card__media {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .highlight-card__scrim {
+    display: none;
   }
 
   .exhibition-panel {

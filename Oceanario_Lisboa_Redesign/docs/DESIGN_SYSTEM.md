@@ -110,7 +110,8 @@ var(--radius-lg)`, imagem em `.media-frame`/`.*-card__media`, scrim de
 legibilidade (`linear-gradient`) sobre a imagem, corpo posicionado sobre o
 scrim. Variam no aspect-ratio e no que é revelado no hover:
 
-- `.highlight-card` — 4:5, título+CTA sempre visíveis.
+- `.highlight-card` — 760.4:580, duas lado a lado a preencher a secção
+  (sem carrossel, sem cabeçalho de secção), título+CTA sempre visíveis.
 - `.exhibition-panel` — imagem + texto lado a lado (flex row), dentro da
   narrativa horizontal pinada. A imagem é dimensionada pela altura
   disponível (`height: 100%` + `aspect-ratio`), não pela largura — ver

@@ -444,28 +444,28 @@
   background: var(--color-background);
 }
 
-.highlights__scroller {
-  display: flex;
+.highlights__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  padding-bottom: var(--space-sm);
-  scrollbar-width: none;
-}
-
-.highlights__scroller::-webkit-scrollbar {
-  display: none;
 }
 
 .highlight-card {
+  /* Sized from the grid column (each card fills its half of the section),
+     capped at the literal 760.4x580 target so it can't grow past it if the
+     container ever gets wider than 2x that plus the gap. Swapping the
+     placeholder for a real photo is a `content.json` change only — the
+     frame, scrim and object-fit: cover (via .media-cover-img) don't care
+     about the source image's native aspect ratio. */
   position: relative;
-  flex: 0 0 min(78vw, 480px);
-  scroll-snap-align: start;
+  width: 100%;
+  max-width: 760.4px;
+  margin-inline: auto;
+  aspect-ratio: 760.4 / 580;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-navy);
   color: var(--color-background);
-  aspect-ratio: 4 / 5;
   display: flex;
   align-items: flex-end;
 }
@@ -711,7 +711,7 @@
   /* Pin mode's panel is a wide 1330:661 banner sized from the pinned
      viewport's leftover height; nothing here is pinned, so it gets its
      own mobile-appropriate portrait card instead — same shape the other
-     card carousels on this page use (.highlight-card, .species-card). */
+     card carousel on this page uses (.species-card). */
   scroll-snap-align: center;
   flex: 0 0 min(86vw, 420px);
   height: auto;

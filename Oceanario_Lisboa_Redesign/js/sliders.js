@@ -193,30 +193,11 @@ export function initRecognitionSlider() {
   startAutoplay();
 }
 
-/** Highlights scroller: keeps prev/next affordance in sync (native snap scroll otherwise). */
-export function initHighlightsScroller() {
-  const root = qs('[data-highlights-root]');
-  const scroller = qs('[data-highlights-track]', root || undefined);
-  if (!scroller) return;
-
-  scroller.setAttribute('tabindex', '0');
-  scroller.setAttribute('role', 'region');
-  scroller.setAttribute('aria-label', 'Destaques — deslize para ver mais');
-  scroller.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      scroller.scrollBy({ left: scroller.clientWidth * 0.8, behavior: isReducedMotion() ? 'auto' : 'smooth' });
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      scroller.scrollBy({ left: -scroller.clientWidth * 0.8, behavior: isReducedMotion() ? 'auto' : 'smooth' });
-    }
-  });
-}
-
 export function initSliders() {
   // Species gallery is initialized by js/scroll-effects.js → initSpeciesScroll(),
   // which picks between this module's drag mode and the desktop sticky-scroll
   // mode via gsap.matchMedia() — see the doc comment on initSpeciesGalleryDrag().
+  // Highlights is a static two-up grid (both items always fully visible), so
+  // it needs no slider/scroller wiring at all.
   initRecognitionSlider();
-  initHighlightsScroller();
 }

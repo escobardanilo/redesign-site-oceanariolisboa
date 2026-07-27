@@ -141,9 +141,6 @@ function renderQuickInfo() {
 function renderHighlights() {
   const root = qs('[data-highlights-root]');
   if (!root) return;
-  qs('[data-highlights-eyebrow]', root) && (qs('[data-highlights-eyebrow]', root).textContent = content.highlights.eyebrow);
-  qs('[data-highlights-title]', root) && (qs('[data-highlights-title]', root).textContent = content.highlights.title);
-  qs('[data-highlights-text]', root) && (qs('[data-highlights-text]', root).textContent = content.highlights.text);
 
   const track = qs('[data-highlights-track]', root);
   if (track) {
