@@ -108,6 +108,15 @@
   --z-header: 500;
   --z-cookie-banner: 700;
   --z-menu-overlay: 900;
+  /* .mega-menu__inner reserves padding-top for the fixed header so it
+     stays visible above the overlay's own content — but the header's
+     own z-index (500) never actually cleared the overlay's (900), so
+     it was rendering underneath, unreachable: both invisible and, since
+     .mega-menu is a full-viewport element, unclickable. That included
+     the menu toggle itself, which doubles as the close control once
+     open — with the header buried, there was no visible or clickable
+     way to close the menu at all. */
+  --z-header-menu-open: 910;
   --z-cursor: 950;
   --z-preloader: 1000;
 
