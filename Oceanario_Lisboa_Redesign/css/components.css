@@ -1005,8 +1005,43 @@
 
 /* ---- Sticky-scroll mode (desktop, motion allowed) ---- */
 
+/* Same height-budget problem as .exhibitions__pin (see docs/ANIMATIONS.md):
+   unpinned, .species__pin's height was whatever its content demanded —
+   header text + a `min(64vh, 600px)` stage + footer — with no regard for
+   the fixed site header eating into the top or for whether the total
+   fit the viewport at all. Pinned, that meant the section-header text
+   started flush at y:0 (behind the fixed nav) and, on anything shorter
+   than ~970px tall, the footer (counter + prev/next + progress bar) —
+   sometimes the bottom of the stage itself — rendered below the fold
+   with no way to reach it until the pin released at the last card. */
+.species--sticky .species__pin {
+  height: 100svh;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.species--sticky .species__pin > .container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.species--sticky .section-header {
+  flex: 0 0 auto;
+  padding-top: calc(var(--header-height) + var(--space-md));
+}
+
 .species--sticky .species__stage {
   cursor: default;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.species--sticky .species__footer {
+  flex: 0 0 auto;
 }
 
 .species--sticky .species__track {
@@ -1014,7 +1049,13 @@
   overflow: visible;
   display: block;
   width: min(100%, 480px);
-  height: min(64vh, 600px);
+  /* Was min(64vh, 600px) — sized from the full viewport, blind to the
+     header/footer sharing that same space. Now sized from .species__stage,
+     which is what actually has room left after them (flex: 1 1 auto
+     above), with 600px kept as an upper cap so it doesn't balloon on
+     very tall, narrow-enough-to-still-be-desktop viewports. */
+  height: 100%;
+  max-height: 600px;
   margin-inline: auto;
 }
 
