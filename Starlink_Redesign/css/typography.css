@@ -1,0 +1,94 @@
+/* ==========================================================================
+   TYPOGRAPHY
+   Self-hosted variable font via @fontsource-variable (no hotlinking).
+   ========================================================================== */
+
+@import '@fontsource-variable/inter';
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+h1 {
+  font-size: var(--fs-display-2xl);
+}
+
+h2 {
+  font-size: var(--fs-display-xl);
+}
+
+h3 {
+  font-size: var(--fs-display-lg);
+}
+
+h4 {
+  font-size: var(--fs-display-md);
+}
+
+p {
+  max-width: var(--measure);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-status);
+  flex: none;
+}
+
+.lead {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-muted);
+  max-width: 38ch;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-faint {
+  color: var(--color-text-faint);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

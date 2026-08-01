@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>About — Starlink Redesign Conceptual</title>
+  <meta name="description" content="About Starlink: a satellite constellation in low Earth orbit built to bring high-speed internet to the whole planet. Conceptual, non-official redesign." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://escobardanilo.github.io/redesign-site-oceanariolisboa/about.html" />
+  <meta name="theme-color" content="#030304" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/favicon.svg" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <noscript>
+    <style>
+      [data-menu] { display: none !important; }
+      [data-speedtest-modal] { display: none !important; }
+    </style>
+  </noscript>
+</head>
+<body data-page="about">
+  <a class="skip-link btn btn-primary" href="#main-content">Skip to main content</a>
+
+  <!--@include: html/components/header.html -->
+  <!--@include: html/components/menu.html -->
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="page-hero__media">
+        <img class="media-cover-img" src="/assets/svg/media-placeholder.svg" data-pending-asset="assets/images/about/mission-hero.jpg" alt="An off-grid vehicle set up at dusk, connected and working far from any city." loading="eager" />
+      </div>
+      <div class="page-hero__overlay"></div>
+      <div class="container page-hero__content" data-reveal>
+        <p class="eyebrow">About</p>
+        <h1 class="page-hero__title">Connecting the whole planet, not just the parts already covered</h1>
+        <p class="lead page-hero__lead">
+          Starlink is a satellite internet constellation in low Earth orbit, built to deliver fast, reliable
+          broadband to places fiber and cable never reached — and to keep working when they fail.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="mission-title">
+      <div class="container split">
+        <div data-reveal>
+          <p class="eyebrow">Mission</p>
+          <h2 class="section-header__title" id="mission-title">Internet access shouldn't depend on your zip code</h2>
+          <p class="lead" style="margin-top: var(--space-md); max-width: 52ch;">
+            Traditional internet infrastructure is expensive to build and maintain across mountains, oceans and
+            sparsely populated regions — so billions of people have been left with slow connections or none at all.
+            Starlink was built to close that gap: instead of laying cable, it puts a dense mesh of small satellites
+            in low Earth orbit, close enough to the ground for fast, low-latency service, and numerous enough to
+            cover virtually the entire globe.
+          </p>
+          <p class="lead" style="margin-top: var(--space-md); max-width: 52ch;">
+            Starlink is developed and operated by SpaceX, using the same launch infrastructure and engineering
+            discipline built for orbital spaceflight — which is part of why the network has scaled so quickly since
+            its first satellites reached orbit.
+          </p>
+        </div>
+        <div class="stat-strip" data-reveal style="align-content: start;">
+          <div class="stat-block">
+            <p class="stat-block__value">LEO</p>
+            <p class="stat-block__label">Low Earth orbit constellation, not a single distant satellite</p>
+          </div>
+          <div class="stat-block">
+            <p class="stat-block__value">Global</p>
+            <p class="stat-block__label">Expanding coverage across a growing list of countries and territories</p>
+          </div>
+          <div class="stat-block">
+            <p class="stat-block__value">SpaceX</p>
+            <p class="stat-block__label">Designed, launched and operated in-house</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight" style="background: var(--color-ink); border-block: 1px solid var(--color-border-soft);" aria-labelledby="timeline-title">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header__copy">
+            <p class="eyebrow">Milestones</p>
+            <h2 class="section-header__title" id="timeline-title">From first launch to a global network</h2>
+          </div>
+        </div>
+
+        <div class="timeline" data-reveal>
+          <div class="timeline__item">
+            <p class="timeline__year">2002</p>
+            <div>
+              <p class="timeline__title">SpaceX is founded</p>
+              <p class="timeline__text">The company that would go on to build and launch the Starlink constellation begins as a rocket manufacturer and launch provider.</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__year">2019</p>
+            <div>
+              <p class="timeline__title">First operational satellites reach orbit</p>
+              <p class="timeline__text">The first large batch of production Starlink satellites launches aboard a Falcon 9, beginning the build-out of the constellation.</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__year">2020</p>
+            <div>
+              <p class="timeline__title">Public beta opens</p>
+              <p class="timeline__text">Early users in select regions get their first hands-on connections, feeding back real-world performance data.</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__year">2021–22</p>
+            <div>
+              <p class="timeline__title">Residential service expands worldwide</p>
+              <p class="timeline__text">Coverage grows across a widening list of countries, with hardware and installation getting simpler with every revision.</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__year">Since</p>
+            <div>
+              <p class="timeline__title">Roam, Maritime, Aviation and Business launch</p>
+              <p class="timeline__text">The same network extends beyond homes: to vehicles, vessels, aircraft and enterprises that need connectivity anywhere they operate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="about-cta-title">
+      <canvas class="starfield-canvas" data-starfield aria-hidden="true"></canvas>
+      <div class="final-cta__scrim"></div>
+      <div class="final-cta__content" data-reveal>
+        <p class="eyebrow">Join the network</p>
+        <h2 class="final-cta__title" id="about-cta-title">See if Starlink is ready for you</h2>
+        <div class="final-cta__actions">
+          <button type="button" class="btn btn-primary" data-get-started data-magnetic="0.25">Get Started</button>
+          <a class="btn btn-secondary" data-magnetic="0.2" href="https://www.starlink.com/reliability" target="_blank" rel="noopener noreferrer">
+            Learn more
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!--@include: html/components/footer.html -->
+  <!--@include: html/components/speedtest-modal.html -->
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

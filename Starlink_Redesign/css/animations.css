@@ -1,0 +1,47 @@
+/* ==========================================================================
+   ANIMATIONS — CSS-side keyframes/utilities. Scroll-driven and timeline
+   animation is handled in JS (gsap-config.js / animations.js /
+   scroll-effects.js); this file only covers what pure CSS does better.
+   ========================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reduced-motion [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.eyebrow::before {
+  animation: pulse-dot 2.4s var(--ease-in-out-quad) infinite;
+}
+
+.reduced-motion .eyebrow::before {
+  animation: none;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbit-graphic__ring--spin {
+  animation: spin-slow 40s linear infinite;
+}
+
+.reduced-motion .orbit-graphic__ring--spin {
+  animation: none;
+}

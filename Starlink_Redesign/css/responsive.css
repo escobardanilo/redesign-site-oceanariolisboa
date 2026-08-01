@@ -1,0 +1,308 @@
+/* ==========================================================================
+   RESPONSIVE
+   Base styles (in layout.css / components.css) target large desktop.
+   This file steps the layout down through each documented breakpoint:
+   1440 → 1280 → 1024 → 768 → 390 → 320 (see docs/DESIGN_SYSTEM.md).
+   Every rule here exists to stop a specific overflow/clipping failure
+   mode, not as a generic "make it smaller" pass — see the inline notes.
+   ========================================================================== */
+
+/* ---------- ≤1280px : Desktop ---------- */
+@media (max-width: 1280px) {
+  :root {
+    --space-section: clamp(3.5rem, 3rem + 4vw, 8rem);
+  }
+
+  .plans__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-grid {
+    gap: var(--space-xl);
+  }
+}
+
+/* ---------- ≤1024px : Laptop / small desktop ---------- */
+@media (max-width: 1024px) {
+  .site-header__nav {
+    display: none;
+  }
+
+  .site-header__actions [data-nav-link='sign-in'] {
+    /* Folded into the mobile menu list instead — see html/components/menu.html. */
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .split,
+  .split--reverse,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .split--reverse {
+    direction: ltr;
+  }
+
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-footer__nav-columns {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-xl);
+  }
+
+  .hero__quickfacts {
+    gap: var(--space-md);
+  }
+
+  .timeline__item,
+  .step-list__item {
+    grid-template-columns: 5rem 1fr;
+  }
+}
+
+/* ---------- ≤768px : Tablet ----------
+   This is the breakpoint the original brief flagged as visibly broken:
+   long headings colliding with the viewport edge and cramped CTA rows.
+   Every heading that carries a `ch` cap on desktop gets a tighter cap
+   here instead of being left to wrap wherever the font's natural
+   measure happens to land. */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 72px;
+    --header-height-scrolled: 58px;
+  }
+
+  .section {
+    padding-block: var(--space-xl);
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .section-header__copy {
+    max-width: none;
+  }
+
+  .hero__title,
+  .page-hero__title {
+    max-width: 13ch;
+  }
+
+  .hero__subtitle,
+  .page-hero__lead {
+    max-width: 30ch;
+  }
+
+  .hero__cta-group,
+  .final-cta__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__cta-group .btn,
+  .final-cta__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .plans__grid,
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-card {
+    min-height: 0;
+  }
+
+  .reliability__stats {
+    gap: var(--space-lg);
+  }
+
+  .coverage__map {
+    aspect-ratio: 4 / 5;
+  }
+
+  .site-footer__nav-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline__item,
+  .step-list__item {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xs);
+  }
+
+  .timeline__year {
+    color: var(--color-text-faint);
+    font-size: var(--fs-body-sm);
+  }
+
+  .speedtest-modal__panel {
+    padding: var(--space-md);
+  }
+}
+
+/* ---------- ≤480px : Mobile (covers 390 and 320) ---------- */
+@media (max-width: 480px) {
+  :root {
+    --space-section: 3.25rem;
+    --header-height: 64px;
+    --header-height-scrolled: 54px;
+  }
+
+  .container {
+    padding-inline: var(--space-sm);
+  }
+
+  .site-header__logo span {
+    display: none;
+  }
+
+  .site-header__actions {
+    gap: var(--space-xs);
+  }
+
+  .hero {
+    padding-top: calc(var(--header-height) + var(--space-sm));
+  }
+
+  .hero__content {
+    padding-bottom: var(--space-xl);
+  }
+
+  .hero__title,
+  .page-hero__title {
+    /* Narrower than the 768px step on purpose: at 390/320 the same
+       13ch cap still let the longest headline's last word hang a
+       single character past the container edge once the fluid
+       clamp() font-size hit its own minimum instead of shrinking
+       further with the viewport. */
+    max-width: 11ch;
+  }
+
+  .hero__subtitle,
+  .page-hero__lead {
+    max-width: 26ch;
+  }
+
+  .hero__quickfacts {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .hero__scroll-cue {
+    display: none;
+  }
+
+  .site-menu__panel {
+    padding-inline: var(--space-lg);
+  }
+
+  .plan-card,
+  .info-card,
+  .auth-card {
+    padding: var(--space-md);
+  }
+
+  .plan-card__actions,
+  .info-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plan-card__actions .btn,
+  .info-card__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .stat-strip,
+  .reliability__stats {
+    gap: var(--space-md);
+  }
+
+  .site-footer__nav-columns {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-footer__wordmark {
+    font-size: clamp(1.75rem, 1.4rem + 3vw, 2.5rem);
+  }
+
+  .contact-method {
+    gap: var(--space-sm);
+  }
+
+  .speedtest-modal {
+    padding: var(--space-sm);
+    align-items: flex-end;
+  }
+
+  .speedtest-modal__panel {
+    width: 100%;
+    max-height: 88svh;
+  }
+
+  .speedtest-modal__metrics {
+    gap: var(--space-xs);
+  }
+
+  .speedtest-modal__mini-stats {
+    gap: var(--space-2xs);
+  }
+}
+
+/* ---------- Final CTA / full-bleed media ----------
+   The reported bug ("last section's video is half cut off on mobile")
+   comes from sizing a full-bleed section off a fixed aspect-ratio tuned
+   for desktop proportions: at a narrow, tall mobile viewport the same
+   ratio yields far less height than the section needs, so the frame
+   crops. Every full-bleed section in this project (.hero, .final-cta,
+   .page-hero) is sized with min-height in `svh` units instead, which
+   scales with the *actual* viewport at every breakpoint rather than
+   inheriting a desktop-shaped ratio — so there is deliberately no
+   media-query override for them below. */
+
+/* ---------- Fine-pointer-only enhancements ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .has-magnetic {
+    will-change: transform;
+  }
+}
+
+/* ---------- Landscape phones: avoid oversized min-heights ---------- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero,
+  .final-cta,
+  .speedtest-modal__panel {
+    min-height: 0;
+    height: auto;
+  }
+
+  .hero {
+    padding-block: calc(var(--header-height) + var(--space-md)) var(--space-lg);
+  }
+}

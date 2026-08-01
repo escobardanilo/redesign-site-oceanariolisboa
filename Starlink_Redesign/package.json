@@ -1,0 +1,23 @@
+{
+  "name": "starlink-redesign",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Conceptual, non-official redesign of the Starlink (SpaceX) website — immersive GSAP-driven front-end prototype.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.1.1",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.18"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Technology — Starlink Redesign Conceptual</title>
+  <meta name="description" content="How Starlink works: low Earth orbit satellites, phased-array terminals and laser inter-satellite links. Conceptual, non-official redesign." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://escobardanilo.github.io/redesign-site-oceanariolisboa/technology.html" />
+  <meta name="theme-color" content="#030304" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/favicon.svg" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <noscript>
+    <style>
+      [data-menu] { display: none !important; }
+      [data-speedtest-modal] { display: none !important; }
+    </style>
+  </noscript>
+</head>
+<body data-page="technology">
+  <a class="skip-link btn btn-primary" href="#main-content">Skip to main content</a>
+
+  <!--@include: html/components/header.html -->
+  <!--@include: html/components/menu.html -->
+
+  <main id="main-content">
+    <section class="page-hero" style="min-height: 52svh;">
+      <div class="page-hero__media">
+        <canvas class="starfield-canvas" data-starfield aria-hidden="true"></canvas>
+      </div>
+      <div class="page-hero__overlay"></div>
+      <div class="container page-hero__content" data-reveal>
+        <p class="eyebrow">Technology</p>
+        <h1 class="page-hero__title" style="max-width: 18ch;">A satellite network built for low latency, not just coverage</h1>
+        <p class="lead page-hero__lead">
+          Most legacy satellite internet relies on a handful of satellites parked in high, distant orbits. Starlink
+          takes the opposite approach: thousands of small satellites, flying close to Earth.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="How it works">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header__copy">
+            <p class="eyebrow">How it works</p>
+            <h2 class="section-header__title">From orbit to your router, in four steps</h2>
+          </div>
+        </div>
+
+        <div class="step-list" data-reveal>
+          <div class="step-list__item">
+            <div>
+              <p class="step-list__title">Low Earth orbit satellites</p>
+              <p class="step-list__text">Flying roughly 550 km up — a fraction of the distance of traditional satellite internet — which cuts signal travel time dramatically and keeps latency close to that of ground-based broadband.</p>
+            </div>
+          </div>
+          <div class="step-list__item">
+            <div>
+              <p class="step-list__title">Laser inter-satellite links</p>
+              <p class="step-list__text">Satellites relay traffic between each other over laser links, routing data across the constellation before it ever has to touch the ground — useful over oceans and remote regions with no local ground station.</p>
+            </div>
+          </div>
+          <div class="step-list__item">
+            <div>
+              <p class="step-list__title">Phased-array user terminal</p>
+              <p class="step-list__text">The dish has no moving parts. It electronically steers a beam to track satellites as they pass overhead, handing off from one to the next automatically and continuously.</p>
+            </div>
+          </div>
+          <div class="step-list__item">
+            <div>
+              <p class="step-list__title">Ground stations and the wider internet</p>
+              <p class="step-list__text">Traffic comes down to a ground station connected to the global internet backbone, completing the round trip in tens of milliseconds rather than the half-second-plus typical of older satellite services.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight" style="background: var(--color-ink); border-block: 1px solid var(--color-border-soft);" aria-label="Hardware">
+      <div class="container split">
+        <div class="media-frame" style="aspect-ratio: 4 / 3; border-radius: var(--radius-lg); overflow: hidden;" data-reveal>
+          <img class="media-cover-img" src="/assets/svg/media-placeholder.svg" data-pending-asset="assets/images/technology/hardware-flatlay.jpg" alt="The Starlink-style dish, router, cables and mounting kit laid out on a dark background." loading="lazy" />
+        </div>
+        <div data-reveal>
+          <p class="eyebrow">Hardware</p>
+          <h2 class="section-header__title">Everything you need is in one box</h2>
+          <p class="lead" style="margin-top: var(--space-md); max-width: 48ch;">
+            A self-steering dish, a WiFi router, a power supply and the cables to connect them — designed to be
+            unboxed, plugged in and pointed at open sky without a professional installer.
+          </p>
+          <div class="stat-strip" style="margin-top: var(--space-lg);">
+            <div class="stat-block">
+              <p class="stat-block__value">~15 min</p>
+              <p class="stat-block__label">Typical self-install time</p>
+            </div>
+            <div class="stat-block">
+              <p class="stat-block__value">0</p>
+              <p class="stat-block__label">Moving parts in the antenna</p>
+            </div>
+          </div>
+          <a class="btn btn-secondary" style="margin-top: var(--space-lg);" href="https://www.starlink.com/reliability" target="_blank" rel="noopener noreferrer">
+            Learn more
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Hardware detail">
+      <div class="container">
+        <div class="media-frame" style="aspect-ratio: 21 / 9; border-radius: var(--radius-lg); overflow: hidden;" data-reveal>
+          <img class="media-cover-img" src="/assets/svg/media-placeholder.svg" data-pending-asset="assets/images/technology/hardware-hero.jpg" alt="Close-up studio shot of the Starlink-style dish antenna mounted on its kickstand." loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="tech-cta-title">
+      <canvas class="starfield-canvas" data-starfield aria-hidden="true"></canvas>
+      <div class="final-cta__scrim"></div>
+      <div class="final-cta__content" data-reveal>
+        <p class="eyebrow">See it for yourself</p>
+        <h2 class="final-cta__title" id="tech-cta-title">Run a live speed test right now</h2>
+        <div class="final-cta__actions">
+          <button type="button" class="btn btn-primary" data-get-started data-magnetic="0.25">Get Started</button>
+          <a class="btn btn-secondary" data-magnetic="0.2" href="https://www.starlink.com/map" target="_blank" rel="noopener noreferrer">
+            Check Availability
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!--@include: html/components/footer.html -->
+  <!--@include: html/components/speedtest-modal.html -->
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

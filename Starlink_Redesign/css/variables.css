@@ -1,0 +1,129 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   Single source of truth for color, type, spacing, radius, z-index,
+   duration and easing. See docs/DESIGN_SYSTEM.md for the annotated version.
+   ========================================================================== */
+
+:root {
+  /* ---------- Color — primary (dark, high-contrast — matches the real
+     Starlink app/site's near-black surfaces rather than a "brand color") ---------- */
+  --color-void: #030304;
+  --color-ink: #0a0a0d;
+  --color-surface-1: #111114;
+  --color-surface-2: #1b1b1f;
+  --color-white: #f5f5f7;
+
+  /* ---------- Color — accents (used sparingly, never all at once) ---------- */
+  --color-signal-blue: #3b82f6;
+  --color-signal-blue-bright: #6ea8ff;
+  --color-status-green: #2ee6a8;
+  --color-alert: #ff5470;
+
+  /* ---------- Color — neutrals derived from the two primaries ---------- */
+  --color-white-92: rgba(245, 245, 247, 0.92);
+  --color-white-70: rgba(245, 245, 247, 0.7);
+  --color-white-50: rgba(245, 245, 247, 0.5);
+  --color-white-16: rgba(245, 245, 247, 0.16);
+  --color-white-08: rgba(245, 245, 247, 0.08);
+  --color-black-40: rgba(3, 3, 4, 0.4);
+  --color-black-70: rgba(3, 3, 4, 0.7);
+
+  /* ---------- Color — semantic roles ---------- */
+  --color-surface: var(--color-void);
+  --color-surface-raised: var(--color-surface-1);
+  --color-text: var(--color-white);
+  --color-text-muted: var(--color-white-70);
+  --color-text-faint: var(--color-white-50);
+  --color-border: var(--color-white-16);
+  --color-border-soft: var(--color-white-08);
+  --color-accent-primary: var(--color-signal-blue-bright);
+  --color-accent-status: var(--color-status-green);
+  --color-accent-alert: var(--color-alert);
+  --color-focus-ring: var(--color-signal-blue-bright);
+  --color-success: var(--color-status-green);
+  --color-error: var(--color-alert);
+
+  /* ---------- Typography — families ----------
+     One geometric/humanist grotesk for both roles — matches the clean
+     system-font look of the real Starlink app and marketing site. */
+  --font-display: 'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ---------- Typography — fluid scale (clamp: min, preferred, max) ---------- */
+  --fs-display-2xl: clamp(2.75rem, 1.9rem + 4.8vw, 7.5rem);   /* hero headline */
+  --fs-display-xl: clamp(2.25rem, 1.6rem + 3.6vw, 5.25rem);   /* section leads */
+  --fs-display-lg: clamp(1.875rem, 1.4rem + 2.4vw, 3.5rem);   /* section titles */
+  --fs-display-md: clamp(1.4rem, 1.15rem + 1.4vw, 2.375rem);  /* card / panel titles */
+  --fs-display-sm: clamp(1.2rem, 1.05rem + 0.7vw, 1.625rem);  /* small headings */
+
+  --fs-body-lg: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);   /* intros / leads */
+  --fs-body: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);     /* base copy */
+  --fs-body-sm: clamp(0.8125rem, 0.79rem + 0.12vw, 0.875rem); /* fine print */
+  --fs-label: clamp(0.6875rem, 0.66rem + 0.1vw, 0.75rem);     /* uppercase labels */
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.7;
+
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-label: 0.14em;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  --measure: 62ch;
+  --measure-narrow: 42ch;
+
+  /* ---------- Spacing scale ---------- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+  --space-section: clamp(4rem, 3rem + 5vw, 10rem);
+  --space-container: clamp(1.25rem, 1rem + 2vw, 4rem);
+
+  /* ---------- Layout ---------- */
+  --container-max: 1440px;
+  --header-height: 80px;
+  --header-height-scrolled: 64px;
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 6px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* ---------- Z-index scale ---------- */
+  --z-base: 1;
+  --z-content: 10;
+  --z-sticky: 100;
+  --z-header: 500;
+  --z-menu-overlay: 900;
+  --z-header-menu-open: 910;
+  --z-modal: 950;
+  --z-cursor: 970;
+  --z-preloader: 1000;
+
+  /* ---------- Duration (mirrored in js/gsap-config.js) ---------- */
+  --dur-instant: 0.15s;
+  --dur-fast: 0.3s;
+  --dur-base: 0.6s;
+  --dur-slow: 0.9s;
+  --dur-cinematic: 1.6s;
+
+  /* ---------- Easing (mirrored in js/gsap-config.js) ---------- */
+  --ease-standard: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
+}

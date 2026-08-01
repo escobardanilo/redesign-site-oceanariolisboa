@@ -1,0 +1,16 @@
+/* ==========================================================================
+   MAIN — the single stylesheet entry linked from every page. Individual
+   layers stay in their own files but are chained here via @import so the
+   cascade order is deterministic (see the sibling Oceanario project for
+   why @import is preferred over multiple <link> tags).
+   ========================================================================== */
+
+@import './reset.css';
+@import './variables.css';
+@import './typography.css';
+@import './global.css';
+@import './layout.css';
+@import './components.css';
+@import './animations.css';
+@import './responsive.css';
+@import './accessibility.css';

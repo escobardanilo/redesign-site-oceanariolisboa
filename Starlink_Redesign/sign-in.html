@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sign In — Starlink Redesign Conceptual</title>
+  <meta name="description" content="Sign in to your Starlink account. Conceptual, non-official redesign — this form hands off to the real Starlink account portal." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://escobardanilo.github.io/redesign-site-oceanariolisboa/sign-in.html" />
+  <meta name="theme-color" content="#030304" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/favicon.svg" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <noscript>
+    <style>
+      [data-menu] { display: none !important; }
+      [data-speedtest-modal] { display: none !important; }
+    </style>
+  </noscript>
+</head>
+<body data-page="sign-in">
+  <a class="skip-link btn btn-primary" href="#main-content">Skip to main content</a>
+
+  <!--@include: html/components/header.html -->
+  <!--@include: html/components/menu.html -->
+
+  <main id="main-content">
+    <div class="auth-shell">
+      <div class="auth-card" data-reveal>
+        <svg class="auth-card__logo icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+          <path d="M7.2 12a4.8 4.8 0 0 1 9.6 0" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+          <path d="M3.2 12a8.8 8.8 0 0 1 17.6 0" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.5" />
+        </svg>
+        <h1 class="auth-card__title">Sign in</h1>
+        <p class="auth-card__lead">Access your account, orders and speed history.</p>
+
+        <form class="auth-card__form" data-signin-form novalidate>
+          <div class="field">
+            <label for="signin-email">Email</label>
+            <input id="signin-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label for="signin-password">Password</label>
+            <input id="signin-password" name="password" type="password" required autocomplete="current-password" placeholder="••••••••" />
+          </div>
+
+          <div class="auth-card__row">
+            <label class="field-checkbox" style="display: flex; gap: var(--space-2xs); text-transform: none;">
+              <input type="checkbox" name="remember" />
+              <span>Remember me</span>
+            </label>
+            <a href="https://www.starlink.com/auth/forgot-password" target="_blank" rel="noopener noreferrer">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary auth-card__submit">Sign in</button>
+
+          <p class="form-note">
+            This is a design demo with no real backend — submitting hands off to the official Starlink account
+            portal, since that's the only place that can actually check real credentials.
+          </p>
+        </form>
+
+        <div class="auth-card__divider">or</div>
+
+        <p class="auth-card__footer">
+          New to Starlink?
+          <button type="button" class="btn-ghost-link" data-get-started style="background: none; text-decoration: underline; font: inherit;">
+            Get Started
+          </button>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!--@include: html/components/footer.html -->
+  <!--@include: html/components/speedtest-modal.html -->
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
